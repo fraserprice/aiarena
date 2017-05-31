@@ -1,0 +1,25 @@
+{
+  "name": "webapps_11",
+  "version": "1.0.0",
+  "description": "Group project for WebApps excercise at Imperial College London",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.doc.ic.ac.uk:lab1617_summer/webapps_11.git"
+  },
+  "author": "Group11 - Peter Kovary, Fraser Price, Filip Stollar, Daniel Zvara",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "docker-python-sandbox": "^0.1.0",
+    "dockerode": "^2.4.3",
+    "express": "^4.15.3",
+    "mongodb": "^2.2.27",
+    "mongoose": "^4.10.4",
+    "passport": "^0.3.2",
+    "stream": "0.0.2"
+  }
+}
