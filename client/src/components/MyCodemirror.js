@@ -5,35 +5,37 @@ import logo from '../res/logo.svg';
 import Codemirror from 'react-codemirror';
 import '../css/codemirror.css';
 require('codemirror/mode/python/python');
-const createReactClass = require('create-react-class');
 
 var defaults = {
 	markdown: 'def main:\n\t# Start writing here',
 };
 
-var MyCodemirror = createReactClass({
-  getInitialState () {
-		return {
-			code: defaults.markdown,
-			mode: 'python',
-		};
-	},
+class MyCodemirror extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+            code: defaults.markdown,
+            mode: 'python',
+		}
+	}
+
 	updateCode (newCode) {
 		this.setState({
 			code: newCode
 		});
-	},
-  render () {
+	}
+
+	render () {
 		var options = {
 			lineNumbers: true,
 			mode: this.state.mode
 		};
 		return (
 			<div>
-				<Codemirror ref="editor" value={this.state.code} onChange={this.updateCode} options={options} autoFocus={true} />
+				<Codemirror ref="editor" value={this.state.code} onChange={this.updateCode.bind(this)} options={options} autoFocus={true} />
 			</div>
 		);
 	}
-});
+};
 
 export default MyCodemirror;
