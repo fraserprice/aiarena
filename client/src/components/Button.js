@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
+import Button from 'react-bootstrap/lib/Button';
+
 
 function MyButton() {
-  return <button
-            title="CoolButton"
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-          >Button</button>;
+  return <Button bsStyle="primary">Button</Button>;
 }
 
 export default MyButton;
