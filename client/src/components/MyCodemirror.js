@@ -31,9 +31,7 @@ class MyCodemirror extends Component {
 			mode: this.state.mode
 		};
 		return (
-			<div>
-				<Codemirror ref="editor" value={this.state.code} onChange={this.updateCode.bind(this)} options={options} autoFocus={true} />
-			</div>
+			<Codemirror ref="editor" value={this.state.code} onChange={this.updateCode.bind(this)} options={options} autoFocus={true} />
 		);
 	}
 };
