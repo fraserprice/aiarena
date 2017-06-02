@@ -8,8 +8,7 @@ build:
         - npm run install-client
     artifacts:
         expire_in: 1 week
-        paths:
-            - client/node_modules
+        untracked: true
 
 deploy:
     stage: deploy
