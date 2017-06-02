@@ -2,9 +2,6 @@ stages:
     - build
     - deploy
 
-before_script:
-    
-
 build:
     stage: build
     script:
@@ -12,7 +9,6 @@ build:
     artifacts:
         path:
             - client/node_modules
-
 
 deploy:
     stage: deploy
