@@ -1,0 +1,20 @@
+stages:
+    - build
+    - deploy
+
+before_script:
+    
+
+build:
+    stage: build
+    script:
+        - npm run install-client
+    artifacts:
+        path:
+            - client/node_modules
+
+
+deploy:
+    stage: deploy
+    scrip:
+        - npm run start-client
