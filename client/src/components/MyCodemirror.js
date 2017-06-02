@@ -19,13 +19,13 @@ class MyCodemirror extends Component {
     };
   }
 
-  updateCode(newCode) {
+  updateCode = (newCode) => {
     this.setState({
       code: newCode,
     });
 
     this.props.codeOnChange(this.state.code);
-  }
+  };
 
   render() {
     const options = {
@@ -36,7 +36,7 @@ class MyCodemirror extends Component {
       <Codemirror
         ref="editor"
         value={this.state.code}
-        onChange={this.updateCode.bind(this)}
+        onChange={this.updateCode}
         options={options}
         autoFocus
       />
