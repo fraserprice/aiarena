@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import logo from '../res/logo.svg';
 
 // Codemirror stuff
@@ -16,12 +16,12 @@ class MyCodemirror extends Component {
     this.state = {
       code: defaults.markdown,
       mode: 'python',
-    }
+    };
   }
 
   updateCode(newCode) {
     this.setState({
-      code: newCode
+      code: newCode,
     });
 
     this.props.codeOnChange(this.state.code);
@@ -30,7 +30,7 @@ class MyCodemirror extends Component {
   render() {
     const options = {
       lineNumbers: true,
-      mode: this.state.mode
+      mode: this.state.mode,
     };
     return (
       <Codemirror
@@ -38,9 +38,9 @@ class MyCodemirror extends Component {
         value={this.state.code}
         onChange={this.updateCode.bind(this)}
         options={options}
-        autoFocus={true}
+        autoFocus
       />
     );
   }
-};
+}
 export default MyCodemirror;

@@ -3,10 +3,7 @@ import React from 'react';
 const style = {
 
 };
-const Footer = () => {
-  return (
-    <footer className="footer" style={style}>
-    </footer>
+const Footer = () => (
+  <footer className="footer" style={style} />
   );
-};
 export default Footer;

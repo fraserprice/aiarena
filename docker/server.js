@@ -15,26 +15,26 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
   res.send('Hello world\n');
 });
 
-app.post('/python', function(req, res) {
-  var code = req.body.payload;
-  fs.writeFile("code.py", code, function(err) {
-    if(err) {
-        console.log("ffs");
-        return console.log(err);
+app.post('/python', (req, res) => {
+  const code = req.body.payload;
+  fs.writeFile('code.py', code, (err) => {
+    if (err) {
+      console.log('ffs');
+      return console.log(err);
     }
 
-    console.log("The file was saved!");
+    console.log('The file was saved!');
   });
 
-  var python = require('child_process').spawn('python', ["code.py"]);
-  var output = "";
-  python.stdout.on('data', function(data) {output += data});
-  python.on('close', function(code){
-    fs.unlinkSync("code.py");
+  const python = require('child_process').spawn('python', ['code.py']);
+  let output = '';
+  python.stdout.on('data', (data) => { output += data; });
+  python.on('close', (code) => {
+    fs.unlinkSync('code.py');
     if (code !== 0) {
       return res.send(500, code);
     }

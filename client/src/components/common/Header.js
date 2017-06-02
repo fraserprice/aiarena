@@ -3,10 +3,7 @@ import React from 'react';
 const style = {
 
 };
-const Header = () => {
-  return (
-    <header className="footer" style={style}>
-    </header>
+const Header = () => (
+  <header className="footer" style={style} />
   );
-};
 export default Header;
