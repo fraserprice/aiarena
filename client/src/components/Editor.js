@@ -9,19 +9,19 @@ class Editor extends Component {
       code: '',
       res: 'Result',
     };
-  }
+  };
 
-  getRes() {
+  getRes = () => {
     return this.state.res;
-  }
+  };
 
-  codeOnChange(newCode) {
+  codeOnChange = (newCode) => {
     this.setState({
       code: newCode,
     });
-  }
+  };
 
-  uploadCode() {
+  uploadCode = () => {
     const code = this.state.code;
     const request = require('request');
     const url = 'http://localhost:3001/python';
@@ -34,7 +34,7 @@ class Editor extends Component {
         // this.setState({res: JSON.parse(res.toString())});
       }
     });
-  }
+  };
 
   render() {
     return (
