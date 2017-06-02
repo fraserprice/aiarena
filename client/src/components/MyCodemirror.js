@@ -23,6 +23,8 @@ class MyCodemirror extends Component {
     this.setState({
       code: newCode
     });
+
+    this.props.codeOnChange(this.state.code);
   }
 
   render() {
