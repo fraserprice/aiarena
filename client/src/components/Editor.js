@@ -24,14 +24,14 @@ class Editor extends Component {
   uploadCode = () => {
     const code = this.state.code;
     const request = require('request');
-    const url = 'http://localhost:3001/python';
+    const url = 'http://146.169.45.11:3001/python';
     const result = '';
     request.post(url, { json: { payload: code } }, (err, res, body) => {
       if (err) {
         console.log(err.toString());
       } else {
         console.log(res);
-        this.setState({ res: JSON.parse(res.toString()) });
+        this.setState({ res: JSON.parse(JSON.stringify(res)) });
       }
     });
   };
