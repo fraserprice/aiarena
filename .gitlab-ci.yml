@@ -7,7 +7,7 @@ build:
     script:
         - npm run install-client
     artifacts:
-        path:
+        paths:
             - client/node_modules
 
 deploy:
