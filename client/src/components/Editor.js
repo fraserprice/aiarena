@@ -42,7 +42,7 @@ class Editor extends Component {
         <div className="row">
           <div className="col-md-5 col-md-offset-1">
             <div className="cm">
-              <MyCodeMirror codeOnChange={this.codeOnChange.bind(this)} />
+              <MyCodeMirror codeOnChange={this.codeOnChange} />
             </div>
           </div>
           <div className="col-md-4 col-md-offset-1">
@@ -54,7 +54,7 @@ class Editor extends Component {
         <div className="row">
           <div className="col-md-5 col-md-offset-1">
             <div className="save-button">
-              <Button uploadCode={this.uploadCode.bind(this)} />
+              <Button uploadCode={this.uploadCode} />
             </div>
           </div>
         </div>
