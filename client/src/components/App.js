@@ -8,7 +8,7 @@ import Editor from "./Editor";
 class App extends Component {
   render() {
     return (
-      <div className="app row">
+      <div className="app row container-fluid">
         <Editor/>
       </div>
     );
