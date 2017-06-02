@@ -5,7 +5,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const sassMiddleware = require('node-sass-middleware');
-const docker = require('dockerode');
+// const docker = require('dockerode');
 const stream = require('stream');
 
 const index = require('./routes/index');
