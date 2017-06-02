@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -7,8 +7,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/runpy', function (req, res) {
-    var code = req.body.code;
-    var resultStream = new stream.Writable();
+    const code = req.body.code;
+    const resultStream = new stream.Writable();
     resultStream._write = function (chunk, encoding, done) {
         console.log(chunk.toString());
         done();
