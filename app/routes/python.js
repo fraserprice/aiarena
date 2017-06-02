@@ -1,18 +1,23 @@
 const express = require('express');
-const router = express.Router();
 const Stream = require('stream');
 const Docker = require('dockerode');
 
-router.post('/', function (req, res) {
-    var code = req.body.payload;
-    var stream = new Stream.Writable();
-    var docker = Docker();
-    stream._write = function (chunk, encoding, done) {
-        console.log(chunk.toString());
-        done();
-    };
+const router = express.Router();
 
-    docker.run('pydock', ['bash', '-c', 'python -c \"' + code + '\"'], stream, function (err, dt, container) {
+router.post('/', function (req, res) {
+  const code = req.body.payload;
+  const stream = new Stream.Writable();
+  const docker = Docker();
+  stream._write = function (chunk, encoding, done) {
+    console.log(chunk.toString());
+    done();
+  };
+
+  docker.run(
+    'pydock',
+    ['bash', '-c', 'python -c \"' + code + '\"'],
+    stream,
+    (err, dt, container) => {
     });
 });
 
