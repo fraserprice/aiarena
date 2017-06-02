@@ -11,6 +11,7 @@ router.post('/', function (req, res) {
   const docker = Docker();
   stream._write = function (chunk, encoding, done) {
     console.log(chunk.toString());
+    res.json({payload : chunk.toString()});
     done();
   };
   docker.run(
