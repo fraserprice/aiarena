@@ -23,11 +23,26 @@ class Editor extends Component {
   render() {
     return (
       <div>
-        <div className="cm">
-          <MyCodeMirror codeOnChange={this.codeOnChange.bind(this)}/>
+        <div className="row">
+          <div className="col-md-5 col-md-offset-1">
+            <div className="cm">
+              <MyCodeMirror codeOnChange={this.codeOnChange.bind(this)}/>
+            </div>
+          </div>
+          <div className="col-md-4 col-md-offset-1">
+            <div className="cm">
+              <textarea className="output" readOnly disabled="yes"></textarea>
+            </div>
+          </div>
         </div>
-          <Button getCode={this.getCode.bind(this)}/>
+        <div className="row">
+          <div className="col-md-5 col-md-offset-1">
+            <div className="save-button">
+              <Button getCode={this.getCode.bind(this)}/>
+            </div>
+          </div>
         </div>
+      </div>
     )
   }
 }

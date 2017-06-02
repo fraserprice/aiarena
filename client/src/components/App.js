@@ -9,9 +9,7 @@ class App extends Component {
   render() {
     return (
       <div className="app row">
-        <div className="col-md-6 col-md-offset-3">
-          <Editor/>
-        </div>
+        <Editor/>
       </div>
     );
   }
