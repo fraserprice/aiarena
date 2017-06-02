@@ -30,8 +30,8 @@ class Editor extends Component {
       if (err) {
         console.log(err.toString());
       } else {
-        // console.log(res);
-        // this.setState({res: JSON.parse(res.toString())});
+        console.log(res);
+        this.setState({ res: JSON.parse(res.toString()) });
       }
     });
   };
