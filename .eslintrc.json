@@ -1,0 +1,12 @@
+{
+  "extends": "airbnb",
+  "plugins": [
+    "react",
+  "jsx-a11y",
+  "import"
+    ],
+  "rules": {
+    "no-unused-vars": "warn",
+    "prefer-arrow-callback": "warn"
+  }
+}
