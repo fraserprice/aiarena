@@ -1,3 +1,3 @@
-web: npm install && npm start
-fend: cd client && npm install && npm start
-bend: cd app && npm install && npm start
+web: npm run install-all && npm start
+fend: cd client && npm run install && npm run start
+bend: cd app && npm run install && npm run start
