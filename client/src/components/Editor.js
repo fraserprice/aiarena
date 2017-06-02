@@ -7,7 +7,12 @@ class Editor extends Component {
     super();
     this.state = {
       code: "",
+      res: "Result",
     }
+  }
+
+  getRes() {
+    return this.state.res;
   }
 
   codeOnChange(newCode) {
@@ -16,8 +21,19 @@ class Editor extends Component {
     })
   }
 
-  getCode() {
-    return this.state.code;
+  uploadCode() {
+    var code = this.state.code;
+    var request = require('request');
+    var url = 'http://localhost:3001/python';
+    var result = "";
+    request.post(url, { json: {payload : code}}, (err, res, body) => {
+      if (err) {
+        console.log(err.toString())
+      } else {
+        //console.log(res);
+        //this.setState({res: JSON.parse(res.toString())});
+      }
+    });
   }
 
   render() {
@@ -31,14 +47,14 @@ class Editor extends Component {
           </div>
           <div className="col-md-4 col-md-offset-1">
             <div className="cm">
-              <textarea className="output" readOnly disabled="yes"></textarea>
+              <textarea className="output" readOnly disabled="yes" value={this.state.res}></textarea>
             </div>
           </div>
         </div>
         <div className="row">
           <div className="col-md-5 col-md-offset-1">
             <div className="save-button">
-              <Button getCode={this.getCode.bind(this)}/>
+              <Button uploadCode={this.uploadCode.bind(this)}/>
             </div>
           </div>
         </div>
