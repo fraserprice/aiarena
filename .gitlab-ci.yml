@@ -12,5 +12,5 @@ build:
 
 deploy:
     stage: deploy
-    scrip:
+    script:
         - npm run start-client
