@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import MyCodeMirror from './MyCodemirror';
 import Button from './Button';
+import Chessdiagram from 'react-chessdiagram';
+
+const lightSquareColor = '#2492FF'; // light blue
+const darkSquareColor = '#005EBB'; // dark blue
+const currentPosition =  'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'; // starting position
+const flip = false;
+const squareSize = 30;
 
 class Editor extends Component {
   constructor() {
@@ -36,6 +43,11 @@ class Editor extends Component {
     });
   };
 
+  onMovePiece = (piece, fromSquare, toSquare) => {
+	  let message = 'You moved ' + piece + fromSquare + ' to ' + toSquare + ' ! It does not stay there.';
+	  alert(message);
+  }
+
   render() {
     return (
       <div>
@@ -55,6 +67,12 @@ class Editor extends Component {
           <div className="col-md-5 col-md-offset-1">
             <div className="save-button">
               <Button uploadCode={this.uploadCode} />
+            </div>
+          </div>
+          <div className="col-md-5 col-md-offset-1">
+            <div className="save-button">
+              <Chessdiagram flip={flip} fen={currentPosition} squareSize={squareSize}
+              lightSquareColor={lightSquareColor} darkSquareColor={darkSquareColor} onMovePiece={this.onMovePiece}/>
             </div>
           </div>
         </div>
