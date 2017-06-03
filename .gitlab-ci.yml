@@ -15,4 +15,3 @@ deploy:
     dependencies:
         - build
     script:
-        - npm run start-client
