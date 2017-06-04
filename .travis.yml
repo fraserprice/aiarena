@@ -1,3 +1,6 @@
+notifications:
+    slack: webapps112017:FjI7aS4lUyb5ZeRmZGdDKJVV
+
 language: node_js
 node_js:
   - "6.1"
