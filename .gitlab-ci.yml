@@ -1,0 +1,19 @@
+stages:
+    - build
+    - deploy
+
+build:
+    stage: build
+    script:
+        - npm run install-client
+    artifacts:
+        paths:
+          - node_modules/
+        expire_in: 1 week
+        untracked: true
+
+deploy:
+    stage: deploy
+    dependencies:
+        - build
+    script:

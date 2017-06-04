@@ -6,11 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "install-app": "cd app && npm install",
+    "install-docker": "cd docker && npm install",
     "install-client": "cd client && npm install",
-    "install": "npm run install-app; npm run install-client",
+    "install-all": "npm install && npm run install-app && npm run install-client && npm run install-docker",
     "start-app": "cd app && npm start",
     "start-client": "cd client && npm start",
-    "start": "concurrently --kill-others \"npm run start-app\" \"npm run start-client\""
+    "stop-docker": "sudo docker stop $(sudo docker ps | tail -n1 | tr -s ' ' | sed -E 's/^.+ ([^ ]+$)/\\1/') || true",
+    "start-docker": "cd docker && sudo docker run -p 8080:8080 node_box",
+    "start": "concurrently --kill-others \"npm run start-app\" \"npm run start-client\" \"npm run stop-docker && npm run start-docker\""
   },
   "repository": {
     "type": "git",
@@ -19,11 +22,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^3.4.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.0.1"
+  },
+  "dependencies": {
+    "concurrently": "^3.4.0"
   }
 }

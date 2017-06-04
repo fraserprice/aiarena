@@ -33,7 +33,7 @@ class MyCodemirror extends React.Component<MirrorProps, MirrorState> {
     });
 
     this.props.codeOnChange(this.state.code);
-  }
+  };
 
   render() {
     const options = {
@@ -45,7 +45,7 @@ class MyCodemirror extends React.Component<MirrorProps, MirrorState> {
       <Codemirror
         ref="editor"
         value={this.state.code}
-        onChange={this.updateCode.bind(this)}
+        onChange={this.updateCode}
         options={options}
       />
     );
