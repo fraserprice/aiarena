@@ -9,3 +9,5 @@ cache:
 install:
   - cd client && npm install
 
+script:
+  - cd client && webpack
