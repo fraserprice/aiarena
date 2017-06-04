@@ -8,8 +8,8 @@ build:
     artifacts:
         paths:
           - node_modules/
-    expire_in: 1 week
-    untracked: true
+        expire_in: 1 week
+        untracked: true
 
 deploy:
     stage: deploy
