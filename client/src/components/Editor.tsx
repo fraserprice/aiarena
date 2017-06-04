@@ -46,9 +46,9 @@ class Editor extends React.Component<{}, EditorState> {
     });
   };
 
-  onMovePiece = (piece, fromSquare, toSquare) => {
-	  let message = 'You moved ' + piece + fromSquare + ' to ' + toSquare + ' ! It does not stay there.';
-	  alert(message);
+  onMovePiece = (piece: any, fromSquare: any, toSquare: any) => {
+    let message = 'You moved ' + piece + fromSquare + ' to ' + toSquare + ' ! It does not stay there.';
+    alert(message);
   }
 
   render() {
