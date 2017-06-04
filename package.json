@@ -8,12 +8,12 @@
     "install-app": "cd app && npm install",
     "install-docker": "cd docker && npm install",
     "install-client": "cd client && npm install",
-    "install-all": "npm install && npm run install-app && npm run install-client && npm run install-docker",
+    "install-all": "npm install && npm run install-app && npm run install-client",
     "start-app": "cd app && npm start",
     "start-client": "cd client && npm start",
     "stop-docker": "sudo docker stop $(sudo docker ps | tail -n1 | tr -s ' ' | sed -E 's/^.+ ([^ ]+$)/\\1/') || true",
     "start-docker": "cd docker && sudo docker run -p 8080:8080 node_box",
-    "start": "concurrently --kill-others \"npm run start-app\" \"npm run start-client\" \"npm run stop-docker && npm run start-docker\""
+    "start": "npm run start-app"
   },
   "repository": {
     "type": "git",

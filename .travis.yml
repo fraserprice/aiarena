@@ -10,7 +10,15 @@ cache:
     - "node_modules"
 
 install:
+  - cd app && npm install && cd ..
   - cd client && npm install
 
 script:
-  - webpack
+  - webpack && cd ..
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: "aa01864e-de10-465b-8de2-5e1f6b46b616"
+  app: ai-fights
+  skip_cleanup: true
