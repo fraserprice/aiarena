@@ -16,6 +16,12 @@ module.exports = {
 
     module: {
         rules: [
+            { test: /\.jsx?$/,
+              loader: "babel-loader",
+              options: {
+                presets: ['es2015', 'react']
+              }
+            },
             // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
             { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
             // css loading
@@ -32,7 +38,7 @@ module.exports = {
               ]
             },
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+            //{ enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
         ]
     },
 
