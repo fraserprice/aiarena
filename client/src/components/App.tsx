@@ -1,11 +1,8 @@
-import React, { Component } from 'react';
-import logo from '../res/logo.svg';
-import MyButton from './Button';
-import MyCodemirror from './MyCodemirror';
+import * as React from 'react';
 import '../css/App.css';
 import Editor from './Editor';
 
-class App extends Component {
+class App extends React.Component<{}, null> {
   render() {
     return (
       <div className="app row container-fluid">

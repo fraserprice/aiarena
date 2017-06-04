@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import logo from '../res/logo.svg';
+import * as React from 'react';
 
 // Codemirror stuff
-import Codemirror from 'react-codemirror';
+import * as Codemirror from 'react-codemirror';
 import '../css/codemirror.css';
 require('codemirror/mode/python/python');
 
@@ -10,8 +9,17 @@ const defaults = {
   markdown: 'def main:\n\t# Start writing here',
 };
 
-class MyCodemirror extends Component {
-  constructor(props) {
+interface MirrorState {
+  code: string;
+  mode: string;
+}
+
+interface MirrorProps {
+  codeOnChange(code: string): void;
+}
+
+class MyCodemirror extends React.Component<MirrorProps, MirrorState> {
+  constructor(props: MirrorProps) {
     super(props);
     this.state = {
       code: defaults.markdown,
@@ -19,7 +27,7 @@ class MyCodemirror extends Component {
     };
   }
 
-  updateCode = (newCode) => {
+  updateCode(newCode: string) {
     this.setState({
       code: newCode,
     });
@@ -32,13 +40,13 @@ class MyCodemirror extends Component {
       lineNumbers: true,
       mode: this.state.mode,
     };
+
     return (
       <Codemirror
         ref="editor"
         value={this.state.code}
         onChange={this.updateCode}
         options={options}
-        autoFocus
       />
     );
   }
