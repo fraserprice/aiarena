@@ -1,19 +1,15 @@
-cache:
-  untracked: true
-  paths:
-    - node_modules/
-
 stages:
     - build
-    - deploy
 
 build:
     stage: build
     script:
         - npm run install-client
     artifacts:
-        expire_in: 1 week
-        untracked: true
+        paths:
+          - node_modules/
+    expire_in: 1 week
+    untracked: true
 
 deploy:
     stage: deploy
