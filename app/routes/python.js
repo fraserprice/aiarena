@@ -1,24 +1,21 @@
 const express = require('express');
 const Stream = require('stream');
-const Docker = require('dockerode');
+var request = require('request');
 
 const router = express.Router();
 
 router.post('/', (req, res) => {
-  let code = req.body.payload;
-  code = code.replace(/"/g, "\'");
-  const stream = new Stream.Writable();
-  const docker = Docker();
-  stream._write = (chunk, encoding, done) => {
-    console.log(chunk.toString());
-    res.json({ payload: chunk.toString() });
-    done();
-  };
-  docker.run(
-    'pydock',
-    ['bash', '-c', `python -c "${code}"`],
-    stream,
-    (err, dt, container) => {});
+  let user_code = req.body.payload;
+  user_code = user_code.replace(/"/g, "\'");
+  var myJSONObject = { payload : user_code };
+  request({
+      url: "http://ec2-52-91-239-221.compute-1.amazonaws.com:8080/python",
+      method: "POST",
+      json: true,
+      body: myJSONObject
+  }, function (error, response, body){
+      res.json({payload:JSON.stringify(body)});
+  });
 });
 
 module.exports = router;
