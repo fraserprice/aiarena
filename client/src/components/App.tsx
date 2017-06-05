@@ -11,11 +11,14 @@ class App extends React.Component<{}, null> {
     return (
       <Router>
           <div>
+              <Nav/>
               <div className="app row container-fluid">
-                  <Nav/>
                   <Switch>
                       <Route exact path="/" component={Editor}/>
                       <Route path="/register" component={RegistrationForm}/>
+                      <Route render={() => {
+                          return <p>Page not found</p>
+                      }}/>
                   </Switch>
               </div>
           </div>

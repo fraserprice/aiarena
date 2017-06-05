@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactBootstrap from 'react-bootstrap';
 
 interface ButtonProps {
-  uploadCode(): void
+  onClick(): void
 }
 
 class MyButton extends React.Component<ButtonProps, null> {
@@ -11,7 +11,7 @@ class MyButton extends React.Component<ButtonProps, null> {
   }
 
   render() {
-    return <ReactBootstrap.Button bsStyle="primary" onClick={this.props.uploadCode}>Upload code</ReactBootstrap.Button>;
+    return <ReactBootstrap.Button bsStyle="primary" onClick={this.props.onClick}>{this.props.children}</ReactBootstrap.Button>;
   }
 }
 
