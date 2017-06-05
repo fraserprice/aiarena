@@ -4,6 +4,8 @@ import MyCodeMirror from './MyCodemirror';
 import Button from './Button';
 import Chessdiagram from 'react-chessdiagram';
 
+let port = normalizePort(process.env.PORT || '3000');
+
 const lightSquareColor = '#2492FF'; // light blue
 const darkSquareColor = '#005EBB'; // dark blue
 const currentPosition =  'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'; // starting position
@@ -36,7 +38,7 @@ class Editor extends React.Component<{}, EditorState> {
 
   uploadCode = () => {
     const code = this.state.code;
-    const url = 'http://127.0.0.1:3000/python';
+    const url = 'http://127.0.0.1:80/python';
     Request.post(url, { json: { payload: code } }, (err: any, res: Request.RequestResponse, body: any) => {
       if (err) {
         console.log(err.toString());
