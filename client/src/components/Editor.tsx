@@ -36,7 +36,7 @@ class Editor extends React.Component<{}, EditorState> {
 
   uploadCode = () => {
     const code = this.state.code;
-    const url = 'http://127.0.0.1:80/python';
+    const url = 'http://127.0.0.1:443/python';
     Request.post(url, { json: { payload: code } }, (err: any, res: Request.RequestResponse, body: any) => {
       if (err) {
         console.log(err.toString());
