@@ -36,7 +36,7 @@ class Editor extends React.Component<{}, EditorState> {
 
   codeOnChange = (newCode: string) => {
     this.setState({
-      code: newCode,
+      code: newCode
     });
   };
 
