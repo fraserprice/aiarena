@@ -27,7 +27,7 @@ class MyCodemirror extends React.Component<MirrorProps, MirrorState> {
     };
   }
 
-  updateCode(newCode: string) {
+  updateCode = (newCode: string) => {
     this.setState({
       code: newCode,
     });
