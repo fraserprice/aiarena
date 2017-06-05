@@ -1,13 +1,25 @@
 import * as React from 'react';
 import '../css/App.css';
 import Editor from './Editor';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Nav from './Nav';
+import RegistrationForm from "./RegistrationForm";
+
 
 class App extends React.Component<{}, null> {
   render() {
     return (
-      <div className="app row container-fluid">
-        <Editor />
-      </div>
+      <Router>
+          <div>
+              <div className="app row container-fluid">
+                  <Nav/>
+                  <Switch>
+                      <Route exact path="/" component={Editor}/>
+                      <Route path="/register" component={RegistrationForm}/>
+                  </Switch>
+              </div>
+          </div>
+      </Router>
     );
   }
 }
