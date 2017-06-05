@@ -4,8 +4,6 @@ import MyCodeMirror from './MyCodemirror';
 import Button from './Button';
 import Chessdiagram from 'react-chessdiagram';
 
-let port = normalizePort(process.env.PORT || '3000');
-
 const lightSquareColor = '#2492FF'; // light blue
 const darkSquareColor = '#005EBB'; // dark blue
 const currentPosition =  'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'; // starting position
