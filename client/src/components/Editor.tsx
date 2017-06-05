@@ -5,6 +5,7 @@ import Button from './Button';
 import Chessdiagram from 'react-chessdiagram';
 import * as chessJs from 'chess.js'
 import * as io from 'socket.io-client';
+import '../css/index.css';
 
 const lightSquareColor = '#2492FF'; // light blue
 const darkSquareColor = '#005EBB'; // dark blue
@@ -86,7 +87,7 @@ class Editor extends React.Component<{}, EditorState> {
         <div className="row">
           <div className="col-md-5 col-md-offset-1">
             <div className="save-button">
-              <Button uploadCode={this.uploadCode} />
+              <Button onClick={this.uploadCode}>Upload Code</Button>
             </div>
           </div>
         </div>
