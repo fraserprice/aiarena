@@ -3,6 +3,7 @@ import * as Request from 'request';
 import MyCodeMirror from './MyCodemirror';
 import Button from './Button';
 import Chessdiagram from 'react-chessdiagram';
+import * as chessJs from 'chess.js'
 
 const lightSquareColor = '#2492FF'; // light blue
 const darkSquareColor = '#005EBB'; // dark blue
@@ -13,14 +14,17 @@ const squareSize = 30;
 interface EditorState {
   code: string;
   res: string;
+  chess: any;
 }
 
 class Editor extends React.Component<{}, EditorState> {
   constructor() {
     super();
+    var gc = new chessJs();
     this.state = {
       code: '',
       res: 'Result',
+      chess: gc,
     };
   };
 
@@ -41,14 +45,17 @@ class Editor extends React.Component<{}, EditorState> {
       if (err) {
         console.log(err.toString());
       } else {
-        this.setState({res: JSON.parse(JSON.stringify(body)).payload});
+        var move = JSON.parse(JSON.stringify(body)).payload;
+        this.onMovePiece(null, null, move);
+        this.setState({res: "ok"});
       }
     });
   };
 
   onMovePiece = (piece: any, fromSquare: any, toSquare: any) => {
-    let message = 'You moved ' + piece + fromSquare + ' to ' + toSquare + ' ! It does not stay there.';
-    alert(message);
+    var newMove = toSquare.slice(1, toSquare.length - 3);
+    this.state.chess.move(newMove);
+    this.setState({res: this.state.chess.fen()});
   }
 
   render() {
@@ -74,7 +81,7 @@ class Editor extends React.Component<{}, EditorState> {
           </div>
           <div className="col-md-5 col-md-offset-1">
             <div className="save-button">
-              <Chessdiagram flip={flip} fen={currentPosition} squareSize={squareSize}
+              <Chessdiagram flip={flip} fen={this.state.chess.fen()} squareSize={squareSize}
               lightSquareColor={lightSquareColor} darkSquareColor={darkSquareColor} onMovePiece={this.onMovePiece}/>
             </div>
           </div>
