@@ -5,10 +5,18 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const sassMiddleware = require('node-sass-middleware');
 const cors = require('cors');
+const mongoose = require('mongoose');
+const mongo = require('mongodb');
+const passport = require('passport');
 
 const python = require('./routes/python');
 
 const app = express();
+const dbURL = 'mongodb://localhost:27017/aiarena';
+
+mongoose.connect(dbURL);
+require('./config/passport');
+
 app.use(cors());
 
 // view engine setup
@@ -21,6 +29,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(sassMiddleware({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
