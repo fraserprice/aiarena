@@ -1,6 +1,9 @@
 import * as React from 'react';
+import * as Request from 'request';
 import Button from './Button';
 import '../css/registrationform.css';
+
+const registrationURL = 'http://localhost:3000/register';
 
 interface RegistrationProps {
     uploadAccountDetails(): void
@@ -17,7 +20,7 @@ class RegistrationForm extends React.Component<RegistrationProps, null> {
 
     private uploadAccountDetails = () => {
         let form = {
-            user: this.getFormElementById('user'),
+            username: this.getFormElementById('username'),
             email: this.getFormElementById('email'),
             password: this.getFormElementById('pass'),
             confirmedPassword: this.getFormElementById('confirm-pass')
@@ -26,7 +29,9 @@ class RegistrationForm extends React.Component<RegistrationProps, null> {
         let formValid = true;
         Object.keys(form).forEach((key, index) => {
             let element = form[key];
-            if(element.value == "") {
+            if(element == null) {
+                formValid = false;
+            } else if(element.value == "") {
                 element.placeholder = "This field cannot be empty";
                 formValid = false;
             }
@@ -36,8 +41,13 @@ class RegistrationForm extends React.Component<RegistrationProps, null> {
             form.confirmedPassword.value = "";
             form.password.placeholder = "Passwords did not match";
         } else if(formValid) {
-            alert('Success');
-            //TODO
+            Request.post(registrationURL, { json: { payload: form } }, (err: any, res: Request.RequestResponse, body: any) => {
+                if (err) {
+                    console.log(err.toString());
+                } else {
+                    console.log('success');
+                }
+            });
         }
     };
 
@@ -46,7 +56,7 @@ class RegistrationForm extends React.Component<RegistrationProps, null> {
             <form className="registration">
                 <div className="form-group">
                     <label >Username</label>
-                    <input type="text" id="user" className="form-control" placeholder="Enter username"/>
+                    <input type="text" id="username" className="form-control" placeholder="Enter username"/>
                 </div>
                 <div className="form-group">
                     <label >Email address</label>
