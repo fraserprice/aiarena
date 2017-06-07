@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mongodb = require('mongodb');
+const passport = require('passport');
 
-router.get('/register', passport.authenticate('local.register', {
-    //TODO
-}));
+router.post('/', passport.authenticate('local.register'));
 
 module.exports = router;
