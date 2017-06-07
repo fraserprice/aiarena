@@ -29,6 +29,7 @@
     "eslint-plugin-react": "^7.0.1"
   },
   "dependencies": {
-    "concurrently": "^3.4.0"
+    "concurrently": "^3.4.0",
+    "socket.io": "^2.0.2"
   }
 }
