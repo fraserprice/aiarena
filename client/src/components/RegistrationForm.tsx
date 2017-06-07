@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as Request from 'request';
 import Button from './Button';
 import '../css/registrationform.css';
 
@@ -41,13 +40,15 @@ class RegistrationForm extends React.Component<RegistrationProps, null> {
             form.confirmedPassword.value = "";
             form.password.placeholder = "Passwords did not match";
         } else if(formValid) {
-            Request.post(registrationURL, { json: { payload: form } }, (err: any, res: Request.RequestResponse, body: any) => {
-                if (err) {
-                    console.log(err.toString());
-                } else {
-                    console.log('success');
-                }
-            });
+            Object.keys(form).forEach(key => form[key] = form[key].value);
+            fetch(registrationURL, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(form)
+            }).then(response => response.json()).then(json => alert('Success!')).catch(() => alert('Failed!'));
         }
     };
 
