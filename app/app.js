@@ -7,6 +7,7 @@ const sassMiddleware = require('node-sass-middleware');
 const cors = require('cors');
 
 const python = require('./routes/python');
+const toClient = require('./routes/toclient');
 
 const app = express();
 app.use(cors());
@@ -30,6 +31,7 @@ app.use(sassMiddleware({
 
 app.use('/', express.static(path.join(__dirname, '../client/')));
 app.use('/python', python);
+app.use('/toclient', toClient);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
