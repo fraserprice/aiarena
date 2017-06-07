@@ -7,7 +7,7 @@ import * as chessJs from 'chess.js'
 
 const lightSquareColor = '#2492FF'; // light blue
 const darkSquareColor = '#005EBB'; // dark blue
-const currentPosition =  'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'; // starting position
+//const currentPosition =  'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'; // starting position
 const flip = false;
 const squareSize = 30;
 
