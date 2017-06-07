@@ -13,6 +13,9 @@ function Nav() {
                     <NavLink activeClassName="active" to="/">Games</NavLink>
                     <NavLink activeClassName="active" to="/">About</NavLink>
                 </ul>
+                <ul className="login-nav nav navbar-nav">
+                    <NavLink activeClassName="active" to="/login">Login</NavLink>
+                </ul>
                 <ul className="signup-nav nav navbar-nav">
                     <NavLink activeClassName="active" to="/register">Register</NavLink>
                 </ul>

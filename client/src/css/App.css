@@ -32,6 +32,18 @@
   color: white;
 }
 
+
+.login-nav {
+  border-radius: 5px;
+  border: 2px solid white;
+  margin-top: 8px;
+  float: right;
+}
+
+.login-nav:hover {
+  background-color: black !important;
+}
+
 .signup-nav {
   border-radius: 5px;
   border: 2px solid white;
