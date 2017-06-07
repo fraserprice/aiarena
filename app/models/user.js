@@ -13,7 +13,7 @@ userSchema.methods.encryptPassword = function() {
     return bcrypt.hashSync(this.password, bcrypt.genSaltSync(5), null);
 };
 
-userSchema.methods.validatePassword = function(password) {
+userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(this.password, password);
 };
 

@@ -22,7 +22,7 @@ passport.use('local.register', new LocalStrategy({
             return done(err);
         }
         if(user) {
-            return done(null, false, {message: 'Email or username already in use'});
+            return done(null, false, {message: 'Email or username in use'});
         }
         const newUser = new User();
         newUser.username = username;
@@ -35,4 +35,23 @@ passport.use('local.register', new LocalStrategy({
             return done(null, newUser);
         });
     });
+}));
+
+passport.use('local.login', new LocalStrategy({
+    usernameField: 'username',
+    passwordField: 'password',
+    passReqToCallback: true
+}, (req, username, password, done) => {
+    User.findOne({'username': username}, (err, user) => {
+        if(err) {
+            return done(err);
+        }
+        if(!user) {
+            return done(null, false, {message: 'Username not found'})
+        } else if(!user.validPassword()) {
+            return done(null, false, {message: 'Wrong password'})
+        }
+
+        return done(null, user);
+    })
 }));

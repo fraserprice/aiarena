@@ -10,7 +10,8 @@ const mongo = require('mongodb');
 const passport = require('passport');
 
 const python = require('./routes/python');
-const register = require('./routes/registration')
+const register = require('./routes/registration');
+const login = require('./routes/login');
 
 const app = express();
 const dbURL = 'mongodb://localhost:27017/aiarena';
@@ -39,6 +40,7 @@ app.use(sassMiddleware({
   sourceMap: true,
 }));
 
+//Routes
 app.use('/', express.static(path.join(__dirname, '../client/')));
 app.use('/python', python);
 app.use('/register', register);
