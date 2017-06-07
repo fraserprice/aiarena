@@ -16,18 +16,21 @@ interface EditorState {
   code: string;
   res: string;
   chess: any;
+  socket: any;
 }
 
 class Editor extends React.Component<{}, EditorState> {
   constructor() {
     super();
     var gc = new chessJs();
-    const socket = io();
     this.state = {
       code: '',
       res: 'Result',
       chess: gc,
+      socket: io(),
     };
+
+    this.state.socket.on("msg", this.resOnReceive);
   };
 
   getRes = () => {
@@ -40,16 +43,17 @@ class Editor extends React.Component<{}, EditorState> {
     });
   };
 
+  resOnReceive = (msg: string) => {
+    this.onMovePiece(null, null, msg);
+  };
+
   uploadCode = () => {
     const code = this.state.code;
-    const url = 'https://ai-fights.herokuapp.com/python';
-    Request.post(url, { json: { payload: code } }, (err: any, res: Request.RequestResponse, body: any) => {
+    const url = 'http://localhost:3000/python';
+    Request.post(url, { json: { payload: code, clientID: this.state.socket.id } }, (err: any, res: Request.RequestResponse, body: any) => {
       if (err) {
         console.log(err.toString());
         this.setState({res: "Error occured while executing command"});
-      } else {
-        var move = JSON.parse(JSON.stringify(body)).payload;
-        this.onMovePiece(null, null, move);
       }
     });
   };
