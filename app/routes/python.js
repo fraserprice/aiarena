@@ -5,15 +5,17 @@ var request = require('request');
 const router = express.Router();
 
 router.post('/', (req, res) => {
-  let user_code = req.body.payload;
-  user_code = user_code.replace(/"/g, "\'");
-  var myJSONObject = { payload : user_code };
+  var userCode = req.body.payload.replace(/"/g, "\'");
+  var clientID = req.body.clientID;
+  var myJSONObject = { payload : userCode, clientID : clientID };
   request({
       url: "http://ec2-52-91-239-221.compute-1.amazonaws.com:8080/python",
+      //url: "http://localhost:8080/python",
       method: "POST",
       json: true,
       body: myJSONObject
   }, function (error, response, body){
+      console.log(JSON.stringify(body));
       res.json({payload:JSON.stringify(body)});
   });
 });
