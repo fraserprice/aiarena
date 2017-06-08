@@ -17,6 +17,7 @@ const login = require('./routes/login');
 const app = express();
 const dbURL = 'mongodb://localhost:27017/aiarena';
 
+mongoose.Promise = global.Promise;
 mongoose.connect(dbURL);
 require('./config/passport');
 
@@ -45,6 +46,8 @@ app.use(sassMiddleware({
 app.use('/', express.static(path.join(__dirname, '../client/')));
 app.use('/python', python);
 app.use('/toclient', toClient);
+app.use('/register', register);
+app.use('/login', login);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

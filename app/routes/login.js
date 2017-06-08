@@ -3,7 +3,9 @@ const router = express.Router();
 const mongodb = require('mongodb');
 const passport = require('passport');
 
-router.post('/', passport.authenticate('local.login'));
+router.post('/', passport.authenticate('local.login'), (req, res) => {
+    res.json({success: true});
+});
 
 module.exports = router;
 

@@ -9,12 +9,20 @@ const userSchema = new Schema({
 
 });
 
-userSchema.methods.encryptPassword = function() {
-    return bcrypt.hashSync(this.password, bcrypt.genSaltSync(5), null);
+userSchema.methods.encryptAndSetPassword = function(password, callback) {
+    bcrypt.hash(password, null, null, (err, hash) => {
+        if(err) {
+            return null;
+        }
+        this.password = hash;
+        return callback();
+    });
 };
 
-userSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(this.password, password);
+userSchema.methods.validPassword = function(password, callback) {
+    bcrypt.compare(password, this.password, (err, match) => {
+        return callback(err, match);
+    });
 };
 
 module.exports = mongoose.model('User', userSchema);

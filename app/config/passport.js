@@ -27,12 +27,13 @@ passport.use('local.register', new LocalStrategy({
         const newUser = new User();
         newUser.username = username;
         newUser.email = req.body.email;
-        newUser.password = newUser.encryptPassword(password);
-        newUser.save((err, data) => {
-            if(err) {
-                return done(err);
-            }
-            return done(null, newUser);
+        newUser.encryptAndSetPassword(password, () => {
+            newUser.save((err, data) => {
+                if(err) {
+                    return done(err);
+                }
+                return done(null, newUser);
+            });
         });
     });
 }));
@@ -48,10 +49,14 @@ passport.use('local.login', new LocalStrategy({
         }
         if(!user) {
             return done(null, false, {message: 'Username not found'})
-        } else if(!user.validPassword()) {
-            return done(null, false, {message: 'Wrong password'})
         }
+        user.validPassword(password, (err, match) => {
+            if(err) {
+                return done(err);
+            }
+            return match ? done(null, user) : done(null, false, {message: 'Wrong password'});
+        });
 
-        return done(null, user);
+
     })
 }));

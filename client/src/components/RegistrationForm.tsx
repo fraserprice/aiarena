@@ -48,7 +48,7 @@ class RegistrationForm extends React.Component<RegistrationProps, null> {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(form)
-            }).then(() => alert('Success!')).catch(() => alert('Failed!'));
+            }).then(response => response.json()).then(json => alert('Success!')).catch(() => alert('Failed!'));
         }
     };
 
