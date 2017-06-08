@@ -4,7 +4,7 @@ import MyCodeMirror from './MyCodemirror';
 import Button from './Button';
 import Chessdiagram from 'react-chessdiagram';
 import * as chessJs from 'chess.js'
-//import * as io from 'socket.io-client';
+import * as io from 'socket.io-client';
 import '../css/index.css';
 
 const lightSquareColor = '#2492FF'; // light blue
@@ -17,17 +17,18 @@ interface EditorState {
   code: string;
   res: string;
   chess: any;
+  socket: any;
 }
 
 class Editor extends React.Component<{}, EditorState> {
   constructor() {
     super();
     var gc = new chessJs();
-    //const socket = io();
     this.state = {
       code: '',
       res: 'Result',
       chess: gc,
+      socket: io(),
     };
   };
 
