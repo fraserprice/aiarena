@@ -43,8 +43,9 @@ class Editor extends React.Component<{}, EditorState> {
 
   uploadCode = () => {
     const code = this.state.code;
-    const url = 'https://ai-fights.herokuapp.com/python';
-    Request.post(url, { json: { payload: code } }, (err: any, res: Request.RequestResponse, body: any) => {
+    const url = 'http://localhost:3000/python';
+    //const url = 'https://ai-fights.herokuapp.com/python';
+    Request.post(url, { json: { payload: code, clientID: this.state.socket.id } }, (err: any, res: Request.RequestResponse, body: any) => {
       if (err) {
         console.log(err.toString());
         this.setState({res: "Error occured while executing command"});

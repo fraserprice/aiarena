@@ -8,10 +8,10 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const mongo = require('mongodb');
 const passport = require('passport');
-
 const python = require('./routes/python');
 const register = require('./routes/registration');
 const login = require('./routes/login');
+const session = require('express-session');
 
 const app = express();
 const dbURL = 'mongodb://localhost:27017/aiarena';
@@ -31,6 +31,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(session({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(sassMiddleware({
@@ -44,6 +45,7 @@ app.use(sassMiddleware({
 app.use('/', express.static(path.join(__dirname, '../client/')));
 app.use('/python', python);
 app.use('/register', register);
+app.use('/login', login);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
