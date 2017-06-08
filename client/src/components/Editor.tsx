@@ -60,13 +60,8 @@ class Editor extends React.Component<{}, EditorState> {
   };
 
   onMovePiece = (piece: any, fromSquare: any, toSquare: any) => {
-    var newMove = toSquare.slice(1, toSquare.length - 3);
-    if (toSquare[0] == "\"") {
-      this.state.chess.move(newMove, {sloppy: true});
-    } else {
-      this.state.chess.move(fromSquare+toSquare, {sloppy: true});
-    }
-    this.setState({res: "You have moved to " + newMove});
+    this.state.chess.move(fromSquare+toSquare, {sloppy: true});
+    this.setState({res: "You have moved to " + toSquare});
     if (this.state.chess.game_over()) {
       this.setState({res: "Game over"});
     }
