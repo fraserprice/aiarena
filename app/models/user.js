@@ -19,9 +19,14 @@ userSchema.methods.encryptAndSetPassword = function(password, callback) {
     });
 };
 
-userSchema.methods.validPassword = function(password, callback) {
+userSchema.methods.validPassword = function(password) {
     bcrypt.compare(password, this.password, (err, match) => {
-        return callback(err, match);
+        if (err) {
+          console.log(err);
+          return false;
+        } else {
+          return true;
+        }
     });
 };
 
