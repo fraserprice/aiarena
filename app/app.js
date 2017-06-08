@@ -13,6 +13,7 @@ const register = require('./routes/registration');
 const login = require('./routes/login');
 const toClient = require('./routes/toclient');
 const session = require('express-session');
+const authMiddleware = require('./auth/auth');
 
 const app = express();
 const dbURL = 'mongodb://localhost:27017/aiarena';
@@ -45,6 +46,7 @@ app.use(sassMiddleware({
 
 //Routes
 app.use('/', express.static(path.join(__dirname, '../client/')));
+app.use('/python', authMiddleware);
 app.use('/python', python);
 app.use('/toclient', toClient);
 app.use('/register', register);
