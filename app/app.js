@@ -11,6 +11,7 @@ const passport = require('passport');
 const python = require('./routes/python');
 const register = require('./routes/registration');
 const login = require('./routes/login');
+const toClient = require('./routes/toclient');
 const session = require('express-session');
 
 const app = express();
@@ -32,7 +33,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(session({ secret: 'keyboard cat' }));
+app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(sassMiddleware({
