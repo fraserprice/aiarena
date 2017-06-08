@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Nav from './Nav';
 import RegistrationForm from "./RegistrationForm";
 import LoginForm from "./LoginForm";
+import UserProfile from "./UserProfile";
 
 
 class App extends React.Component<{}, null> {
@@ -18,6 +19,7 @@ class App extends React.Component<{}, null> {
                       <Route exact path="/" component={Editor}/>
                       <Route path="/register" component={RegistrationForm}/>
                       <Route path="/login" component={LoginForm}/>
+                      <Route path="/profile" component={UserProfile}/>
                       <Route render={() => {
                           return <p>Page not found</p>
                       }}/>
