@@ -8,11 +8,10 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const mongo = require('mongodb');
 const passport = require('passport');
-
 const python = require('./routes/python');
-const toClient = require('./routes/toclient');
 const register = require('./routes/registration');
 const login = require('./routes/login');
+const session = require('express-session');
 
 const app = express();
 const dbURL = 'mongodb://localhost:27017/aiarena';
@@ -33,6 +32,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(session({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(sassMiddleware({

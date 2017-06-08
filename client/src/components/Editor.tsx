@@ -4,7 +4,7 @@ import MyCodeMirror from './MyCodemirror';
 import Button from './Button';
 import Chessdiagram from 'react-chessdiagram';
 import * as chessJs from 'chess.js'
-//import * as io from 'socket.io-client';
+import * as io from 'socket.io-client';
 import '../css/index.css';
 
 const lightSquareColor = '#2492FF'; // light blue
@@ -50,8 +50,8 @@ class Editor extends React.Component<{}, EditorState> {
 
   uploadCode = () => {
     const code = this.state.code;
-    //const url = 'http://localhost:3000/python';
-    const url = 'https://ai-fights.herokuapp.com/python';
+    const url = 'http://localhost:3000/python';
+    //const url = 'https://ai-fights.herokuapp.com/python';
     Request.post(url, { json: { payload: code, clientID: this.state.socket.id } }, (err: any, res: Request.RequestResponse, body: any) => {
       if (err) {
         console.log(err.toString());
