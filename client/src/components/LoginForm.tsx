@@ -1,23 +1,27 @@
 import * as React from 'react';
 import Button from './Button';
 import '../css/registrationform.css';
+import Auth from '../modules/Auth';
+
+import {
+  Redirect,
+} from 'react-router-dom'
 
 const loginURL = 'http://localhost:3000/login';
 
-interface RegistrationProps {
-    uploadLoginDetails(): void
-}
-
-class LoginForm extends React.Component<RegistrationProps, null> {
-    constructor(props: RegistrationProps) {
-        super(props);
+class LoginForm extends React.Component<any, any> {
+    constructor(props: any) {
+      super(props);
+      this.state = {
+        redirectToReferrer: false
+      }
     }
 
     private getFormElementById = (id: string) => {
         return (document.getElementById(id) as HTMLInputElement);
     };
 
-    private uploadLoginDetails = () => {
+    uploadLoginDetails = () => {
         let form = {
             username: this.getFormElementById('username'),
             password: this.getFormElementById('pass'),
@@ -42,11 +46,25 @@ class LoginForm extends React.Component<RegistrationProps, null> {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(form)
-            }).then(response => response.json()).then(json => alert('Success!')).catch(() => alert('Failed!'));
+            }).then((response: any) => {
+              return response.json(); }
+            ).then((response: any) => {
+              Auth.authenticateUser(response.token);
+              console.log(response);
+              this.setState({ redirectToReferrer: true });
+            } );
         }
     };
 
     render() {
+        const { from } = this.props.location.state || { from: { pathname: '/' } };
+        const { redirectToReferrer } = this.state;
+        if (redirectToReferrer) {
+          return (
+            <Redirect to={from}/>
+          )
+        }
+
         return (
             <form className="registration">
                 <div className="form-group">
