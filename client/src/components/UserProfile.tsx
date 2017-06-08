@@ -1,7 +1,5 @@
 import * as React from 'react';
 import '../css/userprofile.css';
-import Button from './Button';
-import {render} from "react-dom";
 import {NavLink} from 'react-router-dom';
 import Auth from "../modules/Auth";
 
@@ -29,12 +27,18 @@ class UserProfile extends React.Component<UserProfileProps, null> {
     return (<p>Profile...</p>)
   };
 
-   render() {
+  loginScreen = () => {
      if(Auth.isUserAuthenticated()) {
-       return this.unauthorizedLoginScreen();
-      } else {
        return this.authorizedLoginScreen();
+      } else {
+       return this.unauthorizedLoginScreen();
      }
+  }
+
+   render() {
+     return (
+       <div>{this.loginScreen()}</div>
+      );
    }
 }
 
