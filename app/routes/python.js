@@ -9,8 +9,8 @@ router.post('/', (req, res) => {
   var clientID = req.body.clientID;
   var myJSONObject = { payload : userCode, clientID : clientID };
   request({
-      //url: "http://ec2-52-91-239-221.compute-1.amazonaws.com:8080/python",
-      url: "http://localhost:8080/python",
+      url: "http://ec2-52-91-239-221.compute-1.amazonaws.com:8080/python",
+      //url: "http://localhost:8080/python",
       method: "POST",
       json: true,
       body: myJSONObject

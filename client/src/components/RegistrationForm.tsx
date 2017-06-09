@@ -2,7 +2,8 @@ import * as React from 'react';
 import Button from './Button';
 import '../css/registrationform.css';
 
-const registrationURL = 'http://localhost:3000/register';
+//const registrationURL = 'http://localhost:3000/register';
+const registrationURL = 'http://https://ai-fights.herokuapp.com/register';
 
 interface RegistrationProps {
     uploadAccountDetails(): void

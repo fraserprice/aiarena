@@ -17,7 +17,8 @@ const profile = require('./routes/profile');
 const authMiddleware = require('./auth/auth');
 
 const app = express();
-const dbURL = 'mongodb://localhost:27017/aiarena';
+//const dbURL = 'mongodb://localhost:27017/aiarena';
+const dbURL = 'mongodb://heroku_ll75kc63:mongo1234@ds019966.mlab.com:19966/heroku_ll75kc63'
 
 mongoose.Promise = global.Promise;
 mongoose.connect(dbURL);

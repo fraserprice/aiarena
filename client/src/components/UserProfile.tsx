@@ -3,6 +3,9 @@ import '../css/userprofile.css';
 //import {NavLink} from 'react-router-dom';
 import Auth from "../modules/Auth";
 import '../css/profile.css';
+import {
+  Redirect,
+} from 'react-router-dom'
 
 const profileURL = 'http://localhost:3000/profile';
 
@@ -10,6 +13,7 @@ interface UserProfileProps {
 }
 
 interface UserProfileData {
+  redirectToEditor: boolean;
   loaded: boolean;
   username: string;
   email: string;
@@ -19,6 +23,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
   constructor(props: UserProfileProps) {
     super(props);
     this.state = {
+      redirectToEditor: false,
       loaded: false,
       username: "loading...",
       email: ""
@@ -30,6 +35,12 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
       <p id="unauthorized">Please log in or register to visit your profile page</p>,
     ]);
   };
+
+  play = () => {
+    this.setState({
+      redirectToEditor: true
+    });
+  }
 
   authorizedLogin = () => {
     return (
@@ -49,7 +60,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
 			</div>
 		</div>
 		<div className="profile-userbuttons">
-			<button type="button" className="btn btn-success btn-sm">Challenge</button>
+			<button type="button" onClick={this.play} className="btn btn-success btn-sm">Play</button>
 			<button type="button" className="btn btn-danger btn-sm">Message</button>
 		</div>
 		<div className="profile-usermenu">
@@ -101,14 +112,11 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
             username: JSON.parse(userDetails).username,
             email: JSON.parse(userDetails).email
           });
-          alert(userDetails);
         });
         return this.authorizedLogin();
       } else {
         return this.authorizedLogin();
       }
-      //TODO: Not sure how to handle this as its async. Will continue tomorrow.
-      //return this.authorizedFailedToGetDetails();
     } else {
       return this.unauthorizedLogin();
     }
@@ -132,6 +140,12 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
   };
 
   render() {
+    if (this.state.redirectToEditor) {
+      return (
+        <Redirect to={{pathname: '/editor'}}/>
+      );
+    }
+
     return (
       <div>
         {this.loginScreen()}
