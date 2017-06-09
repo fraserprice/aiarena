@@ -6,6 +6,7 @@ import Chessdiagram from 'react-chessdiagram';
 import * as chessJs from 'chess.js'
 import * as io from 'socket.io-client';
 import '../css/index.css';
+import Auth from '../modules/Auth';
 
 const lightSquareColor = '#2492FF'; // light blue
 const darkSquareColor = '#005EBB'; // dark blue
@@ -52,11 +53,16 @@ class Editor extends React.Component<{}, EditorState> {
     const code = this.state.code;
     //const url = 'http://localhost:3000/python';
     const url = 'https://ai-fights.herokuapp.com/python';
-    Request.post(url, { json: { payload: code, clientID: this.state.socket.id } }, (err: any, res: Request.RequestResponse, body: any) => {
-      if (err) {
-        console.log(err.toString());
-        this.setState({res: "Error occured while executing command"});
-      }
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + Auth.getToken()
+      },
+      body: JSON.stringify({
+        payload: code,
+        clientID: this.state.socket.id })
     });
   };
 
