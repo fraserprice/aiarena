@@ -86,7 +86,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
 	</div>
 </div>
   );
-  };
+};
 
   authorizedFailedToGetDetails() {
     return(<p>Failed to fetch user details. Please try again.</p>)
@@ -127,7 +127,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     }).then((responseJson: any) => {
       callback(responseJson);
     }).catch((err) => {
-      alert(err);
+      console.log(err);
     });
   };
 
@@ -137,7 +137,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
         {this.loginScreen()}
       </div>
     );
-   }
+  }
 }
 
 export default UserProfile;
