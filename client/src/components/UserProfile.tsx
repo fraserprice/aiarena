@@ -7,7 +7,8 @@ import {
   Redirect,
 } from 'react-router-dom'
 
-const profileURL = 'http://localhost:3000/profile';
+//const profileURL = 'http://localhost:3000/profile';
+const profileURL = 'http://https://ai-fights.herokuapp.com/profile';
 
 interface UserProfileProps {
 }
