@@ -21,12 +21,7 @@ userSchema.methods.encryptAndSetPassword = function(password, callback) {
 
 userSchema.methods.validPassword = function(password, callback) {
   bcrypt.compare(password, this.password, (err, match) => {
-    if (err) {
-      console.log(err);
-      return callback(err, false);
-    } else {
-      return callback(err, match);
-    }
+      callback(err, match);
   });
 };
 

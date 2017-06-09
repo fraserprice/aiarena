@@ -8,8 +8,6 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const mongo = require('mongodb');
 const passport = require('passport');
-const session = require('express-session');
-
 const python = require('./routes/python');
 const register = require('./routes/registration');
 const login = require('./routes/login');
