@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as Request from 'request';
 import MyCodeMirror from './MyCodemirror';
 import Button from './Button';
 import Chessdiagram from 'react-chessdiagram';
