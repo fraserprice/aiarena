@@ -1,13 +1,21 @@
 import * as React from 'react';
 import '../css/App.css';
-import Editor from './Editor';
+import {BrowserRouter} from 'react-router-dom';
+import routes from './Routes';
+import Nav from './Nav';
+
 
 class App extends React.Component<{}, null> {
   render() {
     return (
-      <div className="app row container-fluid">
-        <Editor />
-      </div>
+      <BrowserRouter>
+          <div>
+              <div className="app row container-fluid">
+                  <Nav />
+                  {routes()}
+              </div>
+          </div>
+      </BrowserRouter>
     );
   }
 }

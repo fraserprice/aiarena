@@ -3,7 +3,6 @@ module.exports = {
     output: {
         filename: "bundle.js",
         path: __dirname + "/dist",
-        publicPath: "/public"
     },
 
     // Enable sourcemaps for debugging webpack's output.
@@ -37,7 +36,7 @@ module.exports = {
               ]
             },
             // svg loading
-            { test: /\.svg$/,
+            { test: /\.(svg|jpeg|jpg)$/,
               exclude: /node_modules/,
               use: [
                 "url-loader"
@@ -46,6 +45,10 @@ module.exports = {
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             //{ enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
         ]
+    },
+
+    devServer: {
+        historyApiFallback: true
     },
 
     // When importing a module whose path matches one of the following, just
