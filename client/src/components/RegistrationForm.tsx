@@ -3,7 +3,7 @@ import Button from './Button';
 import '../css/registrationform.css';
 
 //const registrationURL = 'http://localhost:3000/register';
-const registrationURL = 'https://https://ai-fights.herokuapp.com/register';
+const registrationURL = 'https://ai-fights.herokuapp.com/register';
 
 interface RegistrationProps {
     uploadAccountDetails(): void
