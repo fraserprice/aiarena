@@ -8,11 +8,14 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const mongo = require('mongodb');
 const passport = require('passport');
+const session = require('express-session');
+
 const python = require('./routes/python');
 const register = require('./routes/registration');
 const login = require('./routes/login');
 const toClient = require('./routes/toclient');
-const session = require('express-session');
+const profile = require('./routes/profile');
+
 const authMiddleware = require('./auth/auth');
 
 const app = express();
@@ -49,6 +52,8 @@ app.use('/python', python);
 app.use('/toclient', toClient);
 app.use('/register', register);
 app.use('/login', login);
+app.use('/profile', authMiddleware);
+app.use('/profile', profile);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

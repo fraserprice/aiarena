@@ -11,7 +11,6 @@ module.exports = (req, res, next) => {
   const token = req.headers.authorization.split(' ')[1];
 
   return jwt.verify(token, config.jwtSecret, (err, decoded) => {
-    console.log("Error: unauthorized");
     if (err) { return res.status(401).end(); }
 
     const userID = decoded.sub;

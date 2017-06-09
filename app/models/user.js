@@ -12,20 +12,20 @@ const userSchema = new Schema({
 userSchema.methods.encryptAndSetPassword = function(password, callback) {
   bcrypt.hash(password, null, null, (err, hash) => {
     if(err) {
-      return null;
+      return callback();
     }
     this.password = hash;
     return callback();
   });
 };
 
-userSchema.methods.validPassword = function(password) {
+userSchema.methods.validPassword = function(password, callback) {
   bcrypt.compare(password, this.password, (err, match) => {
     if (err) {
       console.log(err);
-      return false;
+      return callback(err, false);
     } else {
-      return true;
+      return callback(err, match);
     }
   });
 };
