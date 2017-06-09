@@ -5,45 +5,43 @@ import Auth from "../modules/Auth";
 
 const profileURL = 'http://localhost:3000/profile';
 
-interface UserProfileProps {
+interface UserProfileState {
+  user: any
 }
 
-class UserProfile extends React.Component<UserProfileProps, null> {
-  constructor(props: UserProfileProps) {
+class UserProfile extends React.Component<any, UserProfileState> {
+  constructor(props) {
     super(props);
+    this.state = {
+      user: null
+    }
   }
 
   unauthorizedLogin() {
-    return ([
-      <p id="unauthorized">Please log in or register to visit your profile page</p>,
-      <ul className="login-nav">
-        <NavLink activeClassName="active" to="/login">Login</NavLink>
-      </ul>,
-      <ul className="signup-nav">
-        <NavLink activeClassName="active" to="/register">Register</NavLink>
-      </ul>
-    ]);
+    return (
+      <div>
+        <p id="unauthorized">Please log in or register to visit your profile page</p>
+        <ul className="login-nav">
+          <NavLink activeClassName="active" to="/login">Login</NavLink>
+        </ul>
+        <ul className="signup-nav">
+          <NavLink activeClassName="active" to="/register">Register</NavLink>
+        </ul>
+      </div>
+    );
   };
 
   authorizedLogin() {
-    return (<p>Profile...</p>)
+    return (
+      <div>
+        <li>Name: {this.state.user.username}</li>
+        <li>Email: {this.state.user.email}</li>
+      </div>
+    )
   };
 
   authorizedFailedToGetDetails() {
     return(<p>Failed to fetch user details. Please try again.</p>)
-  };
-
-  loginScreen() {
-    if(Auth.isUserAuthenticated()) {
-      this.getUserDetails((userDetails) => {
-        alert(userDetails);
-        return this.authorizedLogin();
-      });
-      //TODO: Not sure how to handle this as its async. Will continue tomorrow.
-      return this.authorizedFailedToGetDetails();
-    } else {
-      return this.unauthorizedLogin();
-    }
   };
 
   getUserDetails = (callback) => {
@@ -57,16 +55,27 @@ class UserProfile extends React.Component<UserProfileProps, null> {
     }).then((response: any) => {
       return response.json();
     }).then((responseJson) => {
-      callback(responseJson);
+      callback(JSON.parse(responseJson));
     }).catch((err) => {
-      alert(err);
+      console.log(err);
     });
   };
 
    render() {
-     return (
-       <div>{this.loginScreen()}</div>
-      );
+     console.log('here');
+     if(Auth.isUserAuthenticated()) {
+       if(this.state.user) {
+         alert(this.state.user);
+         return this.authorizedLogin();
+       } else {
+         this.getUserDetails((userDetails) => {
+           this.setState({user: userDetails});
+         });
+         return this.authorizedFailedToGetDetails();
+       }
+     } else {
+       return this.unauthorizedLogin();
+     }
    }
 }
 
