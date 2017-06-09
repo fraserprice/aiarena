@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom'
 
 //const loginURL = 'http://localhost:3000/login';
-const loginURL = 'http://https://ai-fights.herokuapp.com/login';
+const loginURL = 'https://https://ai-fights.herokuapp.com/login';
 
 class LoginForm extends React.Component<any, any> {
     constructor(props: any) {
