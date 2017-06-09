@@ -10,11 +10,11 @@ import Auth from '../modules/Auth';
 const landingPage = () => {
   if (Auth.isUserAuthenticated()) {
     return (
-      <Route exact path="/" component={UserProfile}/>
+      <UserProfile/>
     );
   } else {
     return (
-      <Route exact path="/" component={LoginForm}/>
+      <LoginForm/>
     );
   }
 }
@@ -34,7 +34,7 @@ const landingPage = () => {
 const routes = () => {
   return (
     <Switch>
-      {landingPage()}
+      <Route exact path="/" component={landingPage}/>
       <Route exact path="/login" component={LoginForm}/>
       <Route exact path="/register" component={RegistrationForm}/>
       <Route exact path="/logout" component={Logout}/>

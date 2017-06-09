@@ -47,11 +47,11 @@ app.use(sassMiddleware({
 app.use('/', express.static(path.join(__dirname, '../client/')));
 app.use('/python', authMiddleware);
 app.use('/python', python);
+app.use('/profile', authMiddleware);
+app.use('/profile', profile);
 app.use('/toclient', toClient);
 app.use('/register', register);
 app.use('/login', login);
-app.use('/profile', authMiddleware);
-app.use('/profile', profile);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -57,7 +57,7 @@ class LoginForm extends React.Component<any, any> {
     };
 
     render() {
-        const { from } = this.props.location.state || { from: { pathname: '/' } };
+        const { from } = { from: { pathname: '/' } };
         const { redirectToReferrer } = this.state;
         if (redirectToReferrer) {
           return (
