@@ -45,6 +45,8 @@ app.use(sassMiddleware({
 
 //Routes
 app.use('/', express.static(path.join(__dirname, '../client/')));
+app.use('/res/', express.static(path.join(__dirname, './public/')));
+app.use('/res/profile.jpeg', express.static(path.join(__dirname, './public/')));
 app.use('/python', authMiddleware);
 app.use('/python', python);
 app.use('/profile', authMiddleware);

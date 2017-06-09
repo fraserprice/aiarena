@@ -36,7 +36,7 @@ module.exports = {
               ]
             },
             // svg loading
-            { test: /\.svg$/,
+            { test: /\.(svg|jpeg|jpg)$/,
               exclude: /node_modules/,
               use: [
                 "url-loader"
