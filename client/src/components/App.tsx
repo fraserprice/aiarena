@@ -1,32 +1,21 @@
 import * as React from 'react';
 import '../css/App.css';
-import Editor from './Editor';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
+import routes from './Routes';
 import Nav from './Nav';
-import RegistrationForm from "./RegistrationForm";
-import LoginForm from "./LoginForm";
-import UserProfile from "./UserProfile";
 
 
 class App extends React.Component<{}, null> {
   render() {
     return (
-      <Router>
+      <BrowserRouter>
           <div>
               <div className="app row container-fluid">
                   <Nav />
-                  <Switch>
-                      <Route exact path="/" component={Editor}/>
-                      <Route path="/register" component={RegistrationForm}/>
-                      <Route path="/login" component={LoginForm}/>
-                      <Route path="/profile" component={UserProfile}/>
-                      <Route render={() => {
-                          return <p>Page not found</p>
-                      }}/>
-                  </Switch>
+                  {routes()}
               </div>
           </div>
-      </Router>
+      </BrowserRouter>
     );
   }
 }
