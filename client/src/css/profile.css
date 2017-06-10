@@ -10,7 +10,7 @@ body {
 
 /* Profile container */
 .profile {
-  margin: 20px 0;
+  margin-top: 60px;
 }
 
 /* Profile sidebar */
@@ -65,7 +65,7 @@ body {
 .profile-userbuttons .btn:last-child {
   margin-right: 0px;
 }
-    
+
 .profile-usermenu {
   margin-top: 30px;
 }

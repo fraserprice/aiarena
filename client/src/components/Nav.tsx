@@ -5,7 +5,7 @@ import Auth from '../modules/Auth';
 const logInOut = () => {
   if (!Auth.isUserAuthenticated()) {
     return ([
-      <ul className="login-nav nav navbar-nav">
+      <ul className="signup-nav nav navbar-nav">
           <NavLink activeClassName="active" to="/login">Login</NavLink>
       </ul>,
       <ul className="signup-nav nav navbar-nav">
@@ -29,9 +29,15 @@ const Nav = () => {
                     <NavLink class="navbar-brand" exact activeClassName='active' to='/'>AI Arena</NavLink>
                 </div>
                 <ul className="nav navbar-nav">
+                  <li>
                     <NavLink exact activeClassName="active" to="/">Home</NavLink>
+                  </li>
+                  <li>
                     <NavLink activeClassName="active" to="/">Games</NavLink>
+                  </li>
+                  <li>
                     <NavLink activeClassName="active" to="/">About</NavLink>
+                  </li>
                 </ul>
                 {logInOut()}
             </div>

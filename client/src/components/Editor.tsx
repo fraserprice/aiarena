@@ -12,6 +12,7 @@ const darkSquareColor = '#005EBB'; // dark blue
 //const currentPosition =  'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'; // starting position
 const flip = false;
 const squareSize = 30;
+var player = "White";
 
 interface EditorState {
   code: string;
@@ -26,7 +27,7 @@ class Editor extends React.Component<{}, EditorState> {
     var gc = new chessJs();
     this.state = {
       code: '',
-      res: 'Result',
+      res: 'Game history\n',
       chess: gc,
       socket: io(),
     };
@@ -67,7 +68,12 @@ class Editor extends React.Component<{}, EditorState> {
 
   onMovePiece = (piece: any, fromSquare: any, toSquare: any) => {
     this.state.chess.move(fromSquare+toSquare, {sloppy: true});
-    this.setState({res: "You have moved to " + toSquare});
+    this.setState({res: this.state.res + player + " made a move : " + toSquare});
+    if (player == "White") {
+      player = "Black";
+    } else {
+      player = "White";
+    }
     if (this.state.chess.game_over()) {
       this.setState({res: "Game over"});
     }

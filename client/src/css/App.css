@@ -2,15 +2,26 @@
   background: #de6161;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #2657eb, #de6161);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #2657eb, #de6161); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  height:120vh;
+  height:140vh;
 }
 
 .navigation .navbar-brand {
   border-right: 2px solid white;
 }
 
-.navigation li:hover {
-  text-decoration: underline;
+.navigaton li {
+  font-size: 16px;
+  padding: 10px;
+}
+
+.navbar-header {
+  font-size: 20px;
+  padding: 10px;
+}
+
+.chess {
+  margin-top: 140px;
+  text-align: center;
 }
 
 .navigation a:hover, .navigation a:focus {
@@ -45,13 +56,13 @@
 }
 
 .signup-nav {
+  padding: 5px 10px;
   border-radius: 5px;
   border: 2px solid white;
-  margin-top: 8px;
+  margin: 10px;
   float: right;
 }
 
 .signup-nav:hover {
   background-color: white !important;
 }
-
