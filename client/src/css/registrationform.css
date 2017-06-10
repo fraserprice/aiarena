@@ -1,7 +1,30 @@
-.registration {
-    padding: 10% 25%;
+.panel-default {
+  width: 600px;
+  margin-top: 50px;
+  -webkit-box-shadow: 0px 0px 53px -1px rgba(0,0,0,0.40);
+  -moz-box-shadow: 0px 0px 53px -1px rgba(0,0,0,0.40);
+  box-shadow: 0px 0px 53px -1px rgba(0,0,0,0.40);
 }
 
-.form-group {
-    width: 100%;
+.group-padded-down {
+  padding-bottom: 15px;
+}
+
+.center-group {
+  text-align: center;
+}
+
+.center-group h2 {
+  background: #EC6F66;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #F3A183, #EC6F66);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #F3A183, #EC6F66); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 400;
+  padding-bottom: 5px;
+}
+
+.login-panel {
+  border: none !important;
+  padding: 10px;
 }

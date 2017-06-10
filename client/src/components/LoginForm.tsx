@@ -67,19 +67,30 @@ class LoginForm extends React.Component<any, any> {
         }
 
         return (
-            <form className="registration">
-                <div className="form-group">
-                    <label >Username</label>
-                    <input type="text" id="username" className="form-control" placeholder="Enter username"/>
+            <div className="row">
+              <div className="col-md-6 col-md-offset-3">
+                <div className="panel panel-default login-panel">
+                  <div className="center-group">
+                    <h2>Log In to AI Arena</h2>
+                  </div>
+                  <div className="panel-body">
+                    <form className="registration">
+                        <div className="group-padded-down">
+                            <label >Username</label>
+                            <input type="text" id="username" className="form-control" placeholder="Enter username"/>
+                        </div>
+                        <div className="group-padded-down">
+                            <label>Password</label>
+                            <input type="password" id="pass" className="form-control" placeholder="Password"/>
+                        </div>
+                        <div className="group-padded-down center-group">
+                            <Button onClick={this.uploadLoginDetails}>Login</Button>
+                        </div>
+                    </form>
+                  </div>
                 </div>
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" id="pass" className="form-control" placeholder="Password"/>
-                </div>
-                <div className="form-group">
-                    <Button onClick={this.uploadLoginDetails}>Login</Button>
-                </div>
-            </form>
+              </div>
+            </div>
         );
     }
 }
