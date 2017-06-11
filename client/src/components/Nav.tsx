@@ -14,9 +14,7 @@ const logInOut = () => {
               <img src="../../public/logo.png" width="80px" height="80px"></img>
             </div>
             <div className="col-md-4">
-              <ul className="signup-nav nav navbar-nav">
-                  <NavLink activeClassName="active" to="/register">Register</NavLink>
-              </ul>
+              <NavLink className="btn btn-success register-button" role="button" to="/register">Register</NavLink>
             </div>
           </div>
         </div>
@@ -44,9 +42,7 @@ const logInOut = () => {
              <img src="../../public/logo.png" width="80px" height="80px"></img>
            </div>
            <div className="col-md-4">
-           <ul className="signup-nav nav navbar-nav">
-             <NavLink activeClassName="active" to="/logout">Log out</NavLink>
-           </ul>
+             <NavLink className="btn btn-success register-button" role="button" to="/logout">Log Out</NavLink>
            </div>
          </div>
         </div>
