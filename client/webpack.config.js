@@ -35,6 +35,17 @@ module.exports = {
                 "css-loader"
               ]
             },
+            // scss loading
+            { test: /\.scss$/,
+              exclude: /node_modules/,
+              use: [{
+                  loader: "style-loader" // creates style nodes from JS strings
+              }, {
+                  loader: "css-loader" // translates CSS into CommonJS
+              }, {
+                  loader: "sass-loader" // compiles Sass to CSS
+              }]
+            },
             // svg loading
             { test: /\.(svg|jpeg|jpg)$/,
               exclude: /node_modules/,

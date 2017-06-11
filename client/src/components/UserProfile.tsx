@@ -1,8 +1,8 @@
 import * as React from 'react';
-import '../css/userprofile.css';
+import '../css/userprofile.scss';
 //import {NavLink} from 'react-router-dom';
 import Auth from "../modules/Auth";
-import '../css/profile.css';
+import '../css/profile.scss';
 import {
   Redirect,
 } from 'react-router-dom'

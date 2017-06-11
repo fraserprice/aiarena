@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Button from './Button';
-import '../css/registrationform.css';
+import '../css/registrationform.scss';
 import Auth from '../modules/Auth';
 
 import {

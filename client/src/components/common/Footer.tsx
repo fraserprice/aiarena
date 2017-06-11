@@ -1,9 +1,10 @@
 import * as React from 'react';
 
-const style = {
-
-};
 const Footer = () => (
-  <footer className="footer" style={style} />
+  <footer className="footer">
+    <div className="container">
+      <p>This is a footer</p>
+    </div>
+  </footer>
   );
 export default Footer;

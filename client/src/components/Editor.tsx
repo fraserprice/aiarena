@@ -4,7 +4,7 @@ import Button from './Button';
 import Chessdiagram from 'react-chessdiagram';
 import * as chessJs from 'chess.js'
 import * as io from 'socket.io-client';
-import '../css/index.css';
+import '../css/index.scss';
 import Auth from '../modules/Auth';
 
 const lightSquareColor = '#2492FF'; // light blue

@@ -2,7 +2,7 @@ import * as React from 'react';
 
 // Codemirror stuff
 import * as Codemirror from 'react-codemirror';
-import '../css/codemirror.css';
+import '../css/codemirror.scss';
 require('codemirror/mode/python/python');
 
 const defaults = {

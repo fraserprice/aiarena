@@ -2,16 +2,33 @@
   background: #EC6F66;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #F3A183, #EC6F66);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #F3A183, #EC6F66); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  height:140vh;
 }
 
-.navigation .navbar-brand {
-  border-right: 2px solid white;
+.footer {
+  position: absolute;
+  color: red;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
 }
 
-.navigaton li {
-  font-size: 14px;
-  padding: 10px;
+.navigation {
+  z-index: 5;
+  width: 100%;
+  color: white;
+
+  .navbar-brand {
+    border-right: 2px solid white;
+  }
+
+  li {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  a {
+    color: white;
+  }
 }
 
 .center-logo {
@@ -21,24 +38,6 @@
 .chess {
   margin-top: 140px;
   text-align: center;
-}
-
-.navigation a:hover, .navigation a:focus {
-  background-color: transparent !important;
-}
-
-.navigation .active {
-  text-decoration: underline;
-}
-
-.navigation {
-  z-index: 5;
-  width: 100%;
-  color: white;
-}
-
-.navigation a {
-  color: white;
 }
 
 
