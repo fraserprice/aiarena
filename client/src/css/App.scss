@@ -1,9 +1,14 @@
 body {
   margin: 0;
   padding-bottom: 60px;
-  background: #EC6F66 !important;
-  background: -webkit-linear-gradient(to right, #EC6F66, #F3A183) !important;
-  background: linear-gradient(to right, #EC6F66, #F3A183) !important;
+  background: white;
+  // background: #EC6F66 !important;
+  // background: -webkit-linear-gradient(to right, #EC6F66, #F3A183) !important;
+  // background: linear-gradient(to right, #EC6F66, #F3A183) !important;
+}
+
+h3 {
+  color: #e67e22;
 }
 
 .footer {
@@ -19,8 +24,7 @@ body {
 }
 
 .register-button {
-  margin: 20px;
-  float: right;
+  margin-left: 10px;
 }
 
 .navigation {
@@ -37,7 +41,7 @@ body {
   }
 
   a {
-    color: white;
+    color: black;
   }
 }
 
@@ -48,4 +52,11 @@ body {
 .chess {
   margin-top: 140px;
   text-align: center;
+}
+
+.intro-header {
+  height: 100vh;
+  color: #f8f8f8;
+  background: url('http://www.alignthoughts.com/wp-content/uploads/2016/11/align-thoughts-benefits-of-playing-chesscheckmate.jpg') no-repeat center center;
+  background-size: cover;
 }

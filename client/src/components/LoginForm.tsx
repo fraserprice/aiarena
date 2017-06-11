@@ -2,6 +2,7 @@ import * as React from 'react';
 import Button from './Button';
 import '../css/registrationform.scss';
 import Auth from '../modules/Auth';
+import {NavLink} from 'react-router-dom';
 
 import {
   Redirect,
@@ -67,30 +68,41 @@ class LoginForm extends React.Component<any, any> {
         }
 
         return (
-            <div className="row">
-              <div className="col-md-6 col-md-offset-3">
-                <div className="panel panel-default login-panel">
-                  <div className="center-group">
-                    <h2>Log In to AI Arena</h2>
+          <div className="row intro-header">
+            <div className="container">
+              <div className="row">
+                  <div className="row landing-content">
+                    <div className="col-sm-8">
+
+                    </div>
+                    <div className="col-sm-4">
+                      <div className="panel panel-default login-panel">
+                        <div className="center-group">
+                          <h2>Welcome to AI Arena</h2>
+                          <p>The place where you battle against others with your AI</p>
+                        </div>
+                        <div className="panel-body">
+                          <form className="registration">
+                              <div className="group-padded-down">
+                                  <label >Username</label>
+                                  <input type="text" id="username" className="form-control" placeholder="Enter username"/>
+                              </div>
+                              <div className="group-padded-down">
+                                  <label>Password</label>
+                                  <input type="password" id="pass" className="form-control" placeholder="Password"/>
+                              </div>
+                              <div className="group-padded-down center-group">
+                                  <Button onClick={this.uploadLoginDetails}>Login</Button>
+                                  <NavLink className="btn btn-success register-button" role="button" to="/register">Register</NavLink>
+                              </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="panel-body">
-                    <form className="registration">
-                        <div className="group-padded-down">
-                            <label >Username</label>
-                            <input type="text" id="username" className="form-control" placeholder="Enter username"/>
-                        </div>
-                        <div className="group-padded-down">
-                            <label>Password</label>
-                            <input type="password" id="pass" className="form-control" placeholder="Password"/>
-                        </div>
-                        <div className="group-padded-down center-group">
-                            <Button onClick={this.uploadLoginDetails}>Login</Button>
-                        </div>
-                    </form>
-                  </div>
-                </div>
               </div>
             </div>
+          </div>
         );
     }
 }

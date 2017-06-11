@@ -51,8 +51,8 @@ class Editor extends React.Component<{}, EditorState> {
 
   uploadCode = () => {
     const code = this.state.code;
-    //const url = 'http://localhost:3000/python';
-    const url = 'https://ai-fights.herokuapp.com/python';
+    const url = 'http://localhost:3000/python';
+    //const url = 'https://ai-fights.herokuapp.com/python';
     fetch(url, {
       method: 'POST',
       headers: {

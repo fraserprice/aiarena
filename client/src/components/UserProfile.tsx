@@ -1,8 +1,7 @@
 import * as React from 'react';
-import '../css/userprofile.scss';
-//import {NavLink} from 'react-router-dom';
 import Auth from "../modules/Auth";
 import '../css/profile.scss';
+import {NavLink} from 'react-router-dom';
 import {
   Redirect,
 } from 'react-router-dom'
@@ -45,58 +44,197 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
 
   authorizedLogin = () => {
     return (
-      <div className="container">
-      <div className="row profile">
-      <div className="col-md-3">
-	<div className="profile-sidebar">
-		<div className="profile-userpic">
-			<img src="/res/profile.jpeg" className="img-responsive" alt=""></img>
-		</div>
-		<div className="profile-usertitle">
-			<div className="profile-usertitle-name">
-                          {this.state.username}
-			</div>
-			<div className="profile-usertitle-job">
-				Developer
-			</div>
-		</div>
-		<div className="profile-userbuttons">
-			<button type="button" onClick={this.play} className="btn btn-success btn-sm">Play</button>
-			<button type="button" className="btn btn-danger btn-sm">Message</button>
-		</div>
-		<div className="profile-usermenu">
-			<ul className="nav">
-				<li className="active">
-					<a href="#">
-					<i className="glyphicon glyphicon-home"></i>
-					Overview </a>
-				</li>
-				<li>
-					<a href="#">
-					<i className="glyphicon glyphicon-user"></i>
-					Account Settings </a>
-				</li>
-				<li>
-					<a href="#" target="_blank">
-					<i className="glyphicon glyphicon-ok"></i>
-					Submissions </a>
-				</li>
-				<li>
-					<a href="#">
-					<i className="glyphicon glyphicon-flag"></i>
-					Results </a>
-				</li>
-			</ul>
-		</div>
-	</div>
-		</div>
-		<div className="col-md-9">
-            <div className="profile-content">
-			   Some user related content goes here...
+      <div className="container" id="profile-page">
+        <div className="row">
+          <div className="col-md-3">
+            <div className="row">
+                <div className="col-md-4 profile-pic">
+                </div>
+                  <div className="custom-pane profile-pane col-md-8">
+                    <p className="profile-name">{this.state.username}</p>
+                    <p><a href="/settings">Settings</a></p>
+                    <p><NavLink to="/logout">Log Out</NavLink></p>
+                  </div>
             </div>
-		</div>
-	</div>
-</div>
+            <div className="row">
+              <div className="divide-pane custom-pane friends-pane">
+                <h3>Friends</h3>
+                <div className="row">
+                  <div className="col-sm-5">
+                    <p>Zaniel Dvara</p>
+                  </div>
+                  <div className="col-sm-5">
+                    <a href="/challenge">Challenge</a>
+                  </div>
+                  <div className="col-sm-2">
+                    <div className="online-dot" aria-hidden="true"></div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-5">
+                    <p>Keter Povary</p>
+                  </div>
+                  <div className="col-sm-5">
+                    <a href="/challenge">Challenge</a>
+                  </div>
+                  <div className="col-sm-2">
+                    <div className="offline-dot" aria-hidden="true"></div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-5">
+                    <p>Someone Else</p>
+                  </div>
+                  <div className="col-sm-5">
+                    <a href="/challenge">Challenge</a>
+                  </div>
+                  <div className="col-sm-2">
+                    <div className="offline-dot" aria-hidden="true"></div>
+                  </div>
+                </div>
+                <div className="row friends-search">
+                  <div className="col-sm-12">
+                    <div className="input-group">
+                      <input type="text" className="form-control" placeholder="Search for friends"></input>
+                      <span className="input-group-btn">
+                        <button className="btn btn-default" type="button"><i className="fa fa-search" aria-hidden="true"></i></button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="divide-pane custom-pane stats-pane">
+                <h3>Statistics</h3>
+                <p>Games played : 12</p>
+                <p>Games won : 8</p>
+                <p>Total game time : 4m20s</p>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-9">
+            <div className="custom-pane games-pane">
+              <div>
+                <div className="row">
+                  <div className="col-sm-12">
+                    <h3>Chess</h3>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-3">
+                    <a href="" className="play-link" onClick={this.play}>
+                      <div className="gamecode-pane chess-pane">
+                        <h4>first.py</h4>
+                        <p>Modified 2 hours ago</p>
+                      </div>
+                    </a>
+                  </div>
+                  <div className="col-sm-3">
+                    <div className="gamecode-pane chess-pane">
+                      <h4>iterative.py</h4>
+                      <p>Modified 4 days ago</p>
+                    </div>
+                  </div>
+                  <div className="col-sm-3">
+                    <div className="gamecode-pane chess-pane">
+                      <h4>newAlgo.py</h4>
+                      <p>Modified 1 week ago</p>
+                    </div>
+                  </div>
+                  <div className="col-sm-3">
+                    <div className="gamecode-pane add-code">
+                      <i className="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="top-game-margin">
+                <div className="row">
+                  <div className="col-sm-12">
+                    <h3>Pawn Race</h3>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-3">
+                    <div className="gamecode-pane pawn-pane">
+                      <h4>pawn.py</h4>
+                      <p>Modified 12 hours ago</p>
+                    </div>
+                  </div>
+                  <div className="col-sm-3">
+                    <div className="gamecode-pane pawn-pane">
+                      <h4>pawn2.py</h4>
+                      <p>Modified 6 days ago</p>
+                    </div>
+                  </div>
+                  <div className="col-sm-3">
+                    <div className="gamecode-pane pawn-pane">
+                      <h4>pawn3.py</h4>
+                      <p>Modified 5 weeks ago</p>
+                    </div>
+                  </div>
+                  <div className="col-sm-3">
+                    <div className="gamecode-pane add-code">
+                      <i className="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+//       <div className="container">
+//       <div className="row profile">
+//       <div className="col-md-3">
+// 	<div className="profile-sidebar">
+// 		<div className="profile-userpic">
+// 			<img src="/res/profile.jpeg" className="img-responsive" alt=""></img>
+// 		</div>
+// 		<div className="profile-usertitle">
+// 			<div className="profile-usertitle-name">
+//                           {this.state.username}
+// 			</div>
+// 			<div className="profile-usertitle-job">
+// 				Developer
+// 			</div>
+// 		</div>
+// 		<div className="profile-userbuttons">
+// 			<button type="button" onClick={this.play} className="btn btn-success btn-sm">Play</button>
+// 			<button type="button" className="btn btn-danger btn-sm">Message</button>
+// 		</div>
+// 		<div className="profile-usermenu">
+// 			<ul className="nav">
+// 				<li className="active">
+// 					<a href="#">
+// 					<i className="glyphicon glyphicon-home"></i>
+// 					Overview </a>
+// 				</li>
+// 				<li>
+// 					<a href="#">
+// 					<i className="glyphicon glyphicon-user"></i>
+// 					Account Settings </a>
+// 				</li>
+// 				<li>
+// 					<a href="#" target="_blank">
+// 					<i className="glyphicon glyphicon-ok"></i>
+// 					Submissions </a>
+// 				</li>
+// 				<li>
+// 					<a href="#">
+// 					<i className="glyphicon glyphicon-flag"></i>
+// 					Results </a>
+// 				</li>
+// 			</ul>
+// 		</div>
+// 	</div>
+// 		</div>
+// 		<div className="col-md-9">
+//             <div className="profile-content">
+// 			   Some user related content goes here...
+//             </div>
+// 		</div>
+// 	</div>
+// </div>
   );
 };
 

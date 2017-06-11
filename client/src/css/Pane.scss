@@ -1,0 +1,119 @@
+.custom-pane {
+  padding: 10px 12px;
+  border-radius: 4px;
+  background-color: white;
+  -webkit-box-shadow: 0px 0px 20px -1px rgba(0,0,0,0.20);
+  -moz-box-shadow: 0px 0px 20px -1px rgba(0,0,0,0.20);
+  box-shadow: 0px 0px 20px -1px rgba(0,0,0,0.20);
+
+  h3 {
+    margin: 10px 0px;
+    font-weight: 400;
+  }
+}
+
+.games-pane {
+  padding: 10px 25px;
+  h3 {
+    padding-bottom: 10px;
+    font-weight: 300;
+  }
+}
+
+.gamecode-pane {
+  transition: all .2s ease-in-out;
+  position: relative;
+  height: 100px;
+  padding: 10px;
+  border-radius: 4px;
+  background: #ffffff;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.10);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.10);
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.10);
+  overflow: hidden;
+}
+
+.gamecode-pane:hover {
+  transform: scale(1.05);
+  -webkit-box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.10);
+  -moz-box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.10);
+  box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.10);
+}
+
+.gamecode-pane:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.3;
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+
+.chess-pane:before {
+  background-image: url('http://www.slate.com/content/dam/slate/articles/arts/gaming/2016/10/161013_GAME_chess-promo.jpg.CROP.promo-xlarge2.jpg');
+}
+.pawn-pane:before {
+  background-image: url('http://a.rgbimg.com/cache1rKVGr/users/b/bl/bluehorizon/300/nlGWnki.jpg');
+}
+
+.pawn-pane,.chess-pane {
+  h4 {
+    font-family: 'Roboto Mono', monospace;
+    margin: 0px;
+    z-index: 2;
+    position: relative;
+    color: #333333;
+  }
+
+  p {
+    z-index: 2;
+    position: relative;
+    padding-top: 45px;
+  }
+}
+
+.divide-pane {
+  margin-top: 20px;
+}
+
+.profile-pane {
+  height: 100px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+
+  p {
+    margin-bottom: 5px;
+  }
+
+  a {
+    color: #3498db;
+  }
+}
+
+.friends-pane {
+  a {
+    color: #3498db;
+  }
+
+  h3 {
+    font-weight: 300;
+    margin: 0px 0px 15px 0px;
+  }
+}
+
+.stats-pane {
+  h3 {
+    font-weight: 300;
+    margin: 0px 0px 15px 0px;
+  }
+}

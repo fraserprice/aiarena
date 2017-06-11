@@ -1,9 +1,10 @@
 import * as React from 'react';
 import '../css/App.scss';
+import '../css/Pane.scss';
 import {BrowserRouter} from 'react-router-dom';
 import routes from './Routes';
-import Nav from './Nav';
 import Footer from './common/Footer';
+import Nav from './Nav';
 
 
 class App extends React.Component<{}, null> {
@@ -12,7 +13,7 @@ class App extends React.Component<{}, null> {
       <BrowserRouter>
         <div>
           <Nav />
-          <div className="container-fluid">
+          <div className="container-fluid content">
             {routes()}
           </div>
           <Footer />
