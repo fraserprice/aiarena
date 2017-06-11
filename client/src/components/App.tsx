@@ -10,13 +10,13 @@ class App extends React.Component<{}, null> {
   render() {
     return (
       <BrowserRouter>
-          <div>
-              <div className="app row container-fluid">
-                  <Nav />
-                  {routes()}
-                  <Footer />
-              </div>
+        <div>
+          <Nav />
+          <div className="container-fluid">
+            {routes()}
           </div>
+          <Footer />
+        </div>
       </BrowserRouter>
     );
   }
