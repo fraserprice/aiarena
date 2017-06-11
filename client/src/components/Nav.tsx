@@ -10,7 +10,7 @@ const logInOut = () => {
          <div className="col-md-4">
          </div>
          <div className="col-md-4 center-logo">
-           <img src="../../public/ai.png" width="80px" height="80px"></img>
+           <img src="../../public/logo.png" width="80px" height="80px"></img>
          </div>
          <div className="col-md-4">
            <ul className="signup-nav nav navbar-nav">
@@ -38,7 +38,7 @@ const logInOut = () => {
            </ul>
          </div>
          <div className="col-md-4 center-logo">
-           <img src="../../public/ai.png" width="80px" height="80px"></img>
+           <img src="../../public/logo.png" width="80px" height="80px"></img>
          </div>
          <div className="col-md-4">
          <ul className="signup-nav nav navbar-nav">
