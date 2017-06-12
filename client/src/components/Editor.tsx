@@ -1,17 +1,19 @@
 import * as React from 'react';
-import * as Request from 'request';
 import MyCodeMirror from './MyCodemirror';
 import Button from './Button';
 import Chessdiagram from 'react-chessdiagram';
 import * as chessJs from 'chess.js'
 import * as io from 'socket.io-client';
 import '../css/index.css';
+import Auth from "../modules/Auth";
 
 const lightSquareColor = '#2492FF'; // light blue
 const darkSquareColor = '#005EBB'; // dark blue
 //const currentPosition =  'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'; // starting position
 const flip = false;
 const squareSize = 30;
+const url = 'http://localhost:3000/python';
+//const url = 'https://ai-fights.herokuapp.com/python';
 
 interface EditorState {
   code: string;
@@ -50,13 +52,21 @@ class Editor extends React.Component<{}, EditorState> {
 
   uploadCode = () => {
     const code = this.state.code;
-    //const url = 'http://localhost:3000/python';
-    const url = 'https://ai-fights.herokuapp.com/python';
-    Request.post(url, { json: { payload: code, clientID: this.state.socket.id } }, (err: any, res: Request.RequestResponse, body: any) => {
-      if (err) {
-        console.log(err.toString());
-        this.setState({res: "Error occured while executing command"});
-      }
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + Auth.getToken()
+      },
+      body: JSON.stringify({ payload: code, clientID: 'id' /*TODO: this.state.socket.id returning null*/ })
+    }).then((response: any) => {
+      return response.json();
+    }).then((responseJson: any) => {
+      console.log("Code uploaded");
+    }).catch((err) => {
+      console.log(err.toString());
+      this.setState({res: "Error occured while executing command"});
     });
   };
 

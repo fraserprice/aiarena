@@ -5,8 +5,9 @@ const bcrypt = require('bcrypt-nodejs');
 const userSchema = new Schema({
   username: {type: String, required: true},
   email: {type: String, required: true},
-  password: {type: String, required: true}
-
+  password: {type: String, required: true},
+  submittedCode: [{submitId: String, code: String}],
+  friends: [Schema.Types.ObjectId]
 });
 
 userSchema.methods.encryptAndSetPassword = function(password, callback) {
