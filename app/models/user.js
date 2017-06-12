@@ -8,7 +8,8 @@ const userSchema = new Schema({
   password: {type: String, required: true},
   submittedCode: [{submitId: String, code: String}],
   pendingFriendRequests: [String],
-  friends: [String]
+  friends: [String],
+  challenges: [{date: Date, friend: String, game: String}]
 });
 
 userSchema.methods.encryptAndSetPassword = function(password, callback) {
