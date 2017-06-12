@@ -68,7 +68,7 @@ class Editor extends React.Component<{}, EditorState> {
 
   onMovePiece = (piece: any, fromSquare: any, toSquare: any) => {
     this.state.chess.move(fromSquare+toSquare, {sloppy: true});
-    this.setState({res: this.state.res + player + " made a move : " + toSquare});
+    this.setState({res: this.state.res + player + " made a move : " + toSquare + "\n"});
     if (player == "White") {
       player = "Black";
     } else {
@@ -87,25 +87,23 @@ class Editor extends React.Component<{}, EditorState> {
             <div className="cm">
               <MyCodeMirror codeOnChange={this.codeOnChange} />
             </div>
-          </div>
-          <div className="col-md-4 col-md-offset-1">
-            <div className="chess">
-              <Chessdiagram flip={flip} fen={this.state.chess.fen()} squareSize={squareSize}
-              lightSquareColor={lightSquareColor} darkSquareColor={darkSquareColor} onMovePiece={this.onMovePiece}/>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-5 col-md-offset-1">
             <div className="save-button">
               <Button onClick={this.uploadCode}>Upload Code</Button>
             </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-md-10 col-md-offset-1">
-            <div className="save-button">
-              <textarea className="output" readOnly disabled={true} value={this.state.res} />
+          <div className="col-md-6">
+            <div className="row">
+              <div className="chess">
+                <Chessdiagram flip={flip} fen={this.state.chess.fen()} squareSize={squareSize}
+                lightSquareColor={lightSquareColor} darkSquareColor={darkSquareColor} onMovePiece={this.onMovePiece}/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-10 col-md-offset-1">
+                <div className="save-button">
+                  <textarea className="output" readOnly disabled={true} value={this.state.res} />
+                </div>
+              </div>
             </div>
           </div>
         </div>

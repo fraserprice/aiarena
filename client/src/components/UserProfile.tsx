@@ -121,12 +121,12 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
                 </div>
                 <div className="row">
                   <div className="col-sm-3">
-                    <a href="" className="play-link" onClick={this.play}>
+                    <button type="button" className="play-link" onClick={this.play}>
                       <div className="gamecode-pane chess-pane">
                         <h4>first.py</h4>
                         <p>Modified 2 hours ago</p>
                       </div>
-                    </a>
+                    </button>
                   </div>
                   <div className="col-sm-3">
                     <div className="gamecode-pane chess-pane">
