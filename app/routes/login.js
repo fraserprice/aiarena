@@ -16,13 +16,18 @@ router.post('/', (req, res, next) => {
       return res.status(400).end();
     }
 
-    console.log("logging successful");
-    return res.json({
-      success: true,
-      message: "You have successfully logged in",
-      token: token,
-      user: user
-    });
+    if (!token) {
+      console.log('Invalid credentials');
+      return res.sendStatus(401);
+    } else {
+      console.log(user);
+      return res.json({
+        success: true,
+        message: "You have successfully logged in",
+        token: token,
+        user: user
+      });
+    }
   })(req, res, next);
 });
 

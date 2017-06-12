@@ -57,7 +57,7 @@ passport.use('local.login', new LocalStrategy({
       return done(null, false, {message: 'Username not found'})
     }
 
-    if (user.validPassword(password, (err, match) => {
+    user.validPassword(password, (err, match) => {
       if (err) {
         console.log(err);
         return done(null, false, {message: "Error!"});
@@ -68,9 +68,7 @@ passport.use('local.login', new LocalStrategy({
           sub: user._id
         };
 
-        const data = {
-          name: user.name
-        };
+        const data = user;
 
         const token = jwt.sign(payload, config.jwtSecret);
         console.log("token created: " + token);
@@ -79,6 +77,6 @@ passport.use('local.login', new LocalStrategy({
         console.log("pass invalid");
         return done(null, false, {message: 'Wrong password'});
       }
-    }));
+    });
   });
 }));
