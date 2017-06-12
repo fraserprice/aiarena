@@ -6,10 +6,10 @@ const userSchema = new Schema({
   username: {type: String, required: true},
   email: {type: String, required: true},
   password: {type: String, required: true},
-  submittedCode: [{submitId: String, code: String}],
   pendingFriendRequests: [String],
   friends: [String],
-  pendingChallenges: [{date: Date, friend: String, game: String}]
+  pendingChallenges: [{date: Date, friend: String, game: String}],
+  currentGame: {active: Boolean, id: Number}
 });
 
 userSchema.methods.encryptAndSetPassword = function(password, callback) {

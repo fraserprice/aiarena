@@ -3,7 +3,7 @@ const Stream = require('stream');
 const request = require('request');
 const mongodb = require('mongodb');
 const Verification = require('../auth/verification');
-
+const Game = require('../models/game');
 const router = express.Router();
 
 router.post('/', (req, res) => {
@@ -15,25 +15,31 @@ router.post('/', (req, res) => {
       console.lgo("Verification failed");
     } else {
       console.log("Saving code...");
-      const submitId = user.submittedCode.length > 0 ? parseFloat(user.submittedCode[user.submittedCode.length-1].submitId) + 1 : 0;
-      user.submittedCode.push({submitId: submitId, code: userCode});
-      user.save((err, data) => {
+      Game.findOne({'id': user.currentGame.id}, (err, game) => {
         if(err) {
-          console.log("Failed to save code")
-          return false;
+          return res.sendStatus(503);
         }
-        console.log("Saved code!");
-        return true;
-      });
-      request({
-        url: "http://ec2-52-91-239-221.compute-1.amazonaws.com:8080/python",
-        //url: "http://localhost:8080/python",
-        method: "POST",
-        json: true,
-        body: myJSONObject
-      }, function (error, response, body) {
-        //console.log(JSON.stringify(body));
-        res.json({payload: JSON.stringify(body)});
+        if(game.playerOne.username === user.username) {
+          game.playerOne.code = userCode;
+        } else {
+          game.playerTwo.code = userCode;
+        }
+        game.save((err, data) => {
+          if(err) {
+            console.log("Could not upload code");
+            return res.sendStatus(503);
+          }
+          request({
+            url: "http://ec2-52-91-239-221.compute-1.amazonaws.com:8080/python",
+            //url: "http://localhost:8080/python",
+            method: "POST",
+            json: true,
+            body: myJSONObject
+          }, function (error, response, body) {
+            //console.log(JSON.stringify(body));
+            return res.json({payload: JSON.stringify(body)});
+          });
+        });
       });
     }
   });

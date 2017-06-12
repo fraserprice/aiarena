@@ -3,6 +3,7 @@ const router = express.Router();
 const mongodb = require('mongodb');
 const passport = require('passport');
 const User = require('../models/user');
+const Game = require('../models/game');
 const Verification = require('../auth/verification');
 
 getUser = (username, callback)=> {
@@ -92,8 +93,45 @@ router.get('/challenge/:game/:username', (req, res) => {
         }
       }
       if(pendingChallenge) {
-        //TODO: Start game
+        //Start new game
+        let index = -1;
+        for(x in currentUser.pendingChallenges) {
+          let challenge = currentUser.pendingChallenges[x];
+          if(challenge.name === username && challenge.game === game) {
+            index = x;
+            break;
+          }
+        }
+        currentUser.pendingChallenges.splice(index, 1);
+        let game = new Game();
+        Game.findOne({}, {}, { sort: { 'created_at' : -1 } }, (err, lastGame) => {
+          let id = -1;
+          if(err) {
+            id = 0;
+          } else {
+            id = lastGame.id + 1;
+          }
+          game.id = id;
+          game.game = game;
+          game.playerOne = {username: user.username};
+          game.playerTwo = {username: currentUser.username};
+          game.inProgress = true;
+          game.save((err, data) => {
+            if(err) {
+              console.log("Could not start game");
+              return res.sendStatus(503);
+            }
+            console.log("Game started");
+            currentUser.currentGame = {active: true, id: id};
+            user.currentGame = {active: true, id: id};
+            saveBothUsers(user, currentUser, () => {
+              console.log("Users assigned to game");
+              return res.sendStatus(200);
+            });
+          });
+        });
       } else {
+        //Send challenge request
         user.pendingChallenges.push({date: new Date(), friend: currentUser.username, game: game});
         user.save((err, data) => {
           if(err) {
