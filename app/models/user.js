@@ -7,7 +7,8 @@ const userSchema = new Schema({
   email: {type: String, required: true},
   password: {type: String, required: true},
   submittedCode: [{submitId: String, code: String}],
-  friends: [Schema.Types.ObjectId]
+  pendingFriendRequests: [String],
+  friends: [String]
 });
 
 userSchema.methods.encryptAndSetPassword = function(password, callback) {

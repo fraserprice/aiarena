@@ -16,7 +16,7 @@ router.get('/:username', (req, res) => {
       console.log("here");
       if(err || currentUser.username !== username) {
         console.log("Finding user's details");
-        let publicUserDetails = {username: username, submittedCode: user.submittedCode};
+        let publicUserDetails = {username: username};
         res.json(publicUserDetails);
       } else {
         console.log("Finding your details");

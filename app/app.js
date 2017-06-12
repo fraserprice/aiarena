@@ -14,6 +14,7 @@ const login = require('./routes/login');
 const toClient = require('./routes/toclient');
 const profile = require('./routes/profile');
 const user = require('./routes/user');
+const friend = require('./routes/friend');
 
 const authMiddleware = require('./auth/auth');
 
@@ -51,6 +52,7 @@ app.use('/', express.static(path.join(__dirname, '../client/')));
 app.use('/res/', express.static(path.join(__dirname, './public/')));
 app.use('/res/profile.jpeg', express.static(path.join(__dirname, './public/')));
 app.use('/user', user);
+app.use('/friend', friend);
 app.use('/python', authMiddleware);
 app.use('/python', python);
 app.use('/profile', authMiddleware);
