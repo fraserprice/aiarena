@@ -122,31 +122,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-sm-3">
-                    <button type="button" className="play-link" onClick={this.play}>
-                      <div className="gamecode-pane chess-pane">
-                        <h4>first.py</h4>
-                        <p>Modified 2 hours ago</p>
-                      </div>
-                    </button>
-                  </div>
-                  <div className="col-sm-3">
-                    <div className="gamecode-pane chess-pane">
-                      <h4>iterative.py</h4>
-                      <p>Modified 4 days ago</p>
-                    </div>
-                  </div>
-                  <div className="col-sm-3">
-                    <div className="gamecode-pane chess-pane">
-                      <h4>newAlgo.py</h4>
-                      <p>Modified 1 week ago</p>
-                    </div>
-                  </div>
-                  <div className="col-sm-3">
-                    <div className="gamecode-pane add-code">
-                      <i className="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
-                    </div>
-                  </div>
+                {this.renderGames()}
                 </div>
               </div>
               <div className="top-game-margin">
@@ -187,8 +163,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
       </div>
   );
 };
-
-  authorizedFailedToGetDetails() {
+authorizedFailedToGetDetails() {
     return(<p>Failed to fetch user details. Please try again.</p>)
   };
 
@@ -212,7 +187,6 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
   };
 
   getUserState = (callback: (user: any) => void) => {
-    console.log(this.state.username);
     fetch(HOST_URL + "/user/" + this.state.username, {
       method: 'GET',
       headers: {
@@ -226,6 +200,29 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
       callback(responseJson);
     });
   };
+
+  renderGames = () => {
+    const submissions = [{name: "Sub1"}, {name: "Sub2"}]; //this.state.submissions;
+    var submissionHolders:any[];
+    submissionHolders = [];
+    for (var i = 0; i < submissions.length; i++) {
+      submissionHolders.push(
+                   <div className="col-sm-3">
+                     <button type="button" className="play-link" onClick={this.play}>
+                       <div className="gamecode-pane chess-pane">
+                         <h4>{submissions[i].name}</h4>
+                         <p>Modified 2 hours ago</p>
+                       </div>
+                     </button>
+                   </div>
+      );
+    }
+
+    return (<div> {submissionHolders} </div>);
+  };
+
+
+
 
   render() {
     if (this.state.redirectToEditor) {
