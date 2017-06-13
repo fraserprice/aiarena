@@ -10,7 +10,7 @@ import Auth from '../modules/Auth';
 const landingPage = () => {
   if (Auth.isUserAuthenticated()) {
     return (
-      <UserProfile match="nouser"/>
+      <LoginForm/>
     );
   } else {
     return (
