@@ -3,7 +3,7 @@ import Button from './Button';
 import '../css/registrationform.scss';
 import Auth from '../modules/Auth';
 import Config from '../config';
-import { Redirect, Navlink } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 
 const config = Config();
 const LOGIN_URL = config.hostname + '/login';
