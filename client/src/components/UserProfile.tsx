@@ -1,13 +1,13 @@
 import * as React from 'react';
+import {NavLink} from 'react-router-dom';
 import Auth from "../modules/Auth";
 import '../css/profile.scss';
-import {NavLink} from 'react-router-dom';
 import {
   Redirect,
 } from 'react-router-dom'
 
-//const profileURL = 'http://localhost:3000/profile';
-const profileURL = 'https://ai-fights.herokuapp.com/profile';
+const profileURL = 'http://localhost:3000/profile';
+//const profileURL = 'https://ai-fights.herokuapp.com/profile';
 
 interface UserProfileProps {
 }

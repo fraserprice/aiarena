@@ -1,12 +1,10 @@
 import * as React from 'react';
-import Button from './Button';
 import '../css/registrationform.scss';
 import Auth from '../modules/Auth';
-import {NavLink} from 'react-router-dom';
-
-import {
-  Redirect,
-} from 'react-router-dom'
+import '../css/main.scss'
+import '../css/devices.scss'
+import Button from './Button';
+import { Redirect, NavLink } from 'react-router-dom';
 
 //const loginURL = 'http://localhost:3000/login';
 const loginURL = 'https://ai-fights.herokuapp.com/login';
@@ -68,40 +66,140 @@ class LoginForm extends React.Component<any, any> {
         }
 
         return (
-          <div className="row intro-header">
-            <div className="container">
-              <div className="row">
-                  <div className="row landing-content">
-                    <div className="col-sm-8">
-
-                    </div>
-                    <div className="col-sm-4">
-                      <div className="panel panel-default login-panel">
-                        <div className="center-group">
-                          <h2>Welcome to AI Arena</h2>
-                          <p>The place where you battle against others with your AI</p>
-                        </div>
-                        <div className="panel-body">
-                          <form className="registration">
-                              <div className="group-padded-down">
-                                  <label >Username</label>
-                                  <input type="text" id="username" className="form-control" placeholder="Enter username"/>
-                              </div>
-                              <div className="group-padded-down">
-                                  <label>Password</label>
-                                  <input type="password" id="pass" className="form-control" placeholder="Password"/>
-                              </div>
-                              <div className="group-padded-down center-group">
-                                  <Button onClick={this.uploadLoginDetails}>Login</Button>
-                                  <NavLink className="btn btn-success register-button" role="button" to="/register">Register</NavLink>
-                              </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+          <div className="row">
+          <div className="header">
+            <div className="container-lrg">
+              <div className="col-12 spread">
+                <div className="logo">
+                  AI Arena
+                </div>
+                <div>
+                  <a className="nav-link" href="#register">
+                    Login
+                  </a>
+                </div>
               </div>
             </div>
+            <div className="container-sml">
+              <div className="col-12 text-center">
+                <h1 className="heading">
+                  Challenge your friends to an AI Match
+                </h1>
+                <h2 className="paragraph">
+                  AI Arena is an online tool made for anyone passionate about game AI’s to visualise, profile and share the results of their algorithm fighting another AI. You can challenge friends or companies to see who’s best!
+                </h2>
+                <div className="ctas">
+                  <NavLink className="ctas-button" role="button" to="/register">Register</NavLink>
+                </div>
+              </div>
+            </div>
+            <div className="container-lrg">
+              <div className="centerdevices col-12">
+                <div className="computerwrapper" id="register">
+                  <div className="computer">
+                    <div className="mask">
+                    <div className="panel-body">
+                      <div className="col-md-10 col-md-offset-1 top-margin">
+                      <form className="registration">
+                          <div className="group-padded-down">
+                              <label>Username</label>
+                              <input type="text" id="username" className="form-control" placeholder="Enter username"/>
+                          </div>
+                          <div className="group-padded-down">
+                              <label>Password</label>
+                              <input type="password" id="pass" className="form-control" placeholder="Password"/>
+                          </div>
+                          <div className="group-padded-down center-group">
+                              <Button onClick={this.uploadLoginDetails}>Login</Button>
+                          </div>
+                      </form>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="feature3">
+            <div className="container-lrg row">
+              <div className="col-md-4">
+                <b className="emoji">
+                  🖥
+                </b>
+                <h3 className="subheading">
+                  Battle against others with your AI
+                </h3>
+                <p className="paragraph">
+                    AI Arena is an online tool made for anyone passionate about game AI’s to visualise, profile and share the results of their algorithm fighting another AI. You can challenge friends or companies to see who’s best!
+                </p>
+              </div>
+              <div className="col-md-4">
+                <b className="emoji">
+                  🎉
+                </b>
+                <h3 className="subheading">
+                  Real time results on the editor page
+                </h3>
+                <p className="paragraph">
+                  Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+                </p>
+              </div>
+              <div className="col-md-4">
+                <b className="emoji">
+                  🚀
+                </b>
+                <h3 className="subheading">
+                  Keep track of your games
+                </h3>
+                <p className="paragraph">
+                 Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="socialproof">
+            <div className="container-sml">
+              <div className="text-center">
+                <div className="col-12">
+                  <h4 className="subheading">
+                    "Nejaky komentar sem od nasho Janka"
+                  </h4>
+                  <p className="paragraph">
+                    Jan Matas - Software Engineer
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="footer">
+            <div className="container-sml">
+              <div className="col-12 text-center">
+                <div>
+                  <a className="nav-link">
+                    About
+                  </a>
+                  <a className="nav-link">
+                    Legas
+                  </a>
+                  <a className="nav-link">
+                    Contact
+                  </a>
+                  <a className="nav-link">
+                    TOS
+                  </a>
+                  <a className="nav-link">
+                    Privacy
+                  </a>
+                </div>
+                <div>
+                  <span>
+                    Imperial Colidz
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
           </div>
         );
     }

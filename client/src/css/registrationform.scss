@@ -6,31 +6,12 @@
   text-align: center;
 }
 
-.landing-content {
-  margin-top: 50px;
-
-  .login-panel {
-    margin-top: 50px;
-    -webkit-box-shadow: 0px 0px 53px -1px rgba(0,0,0,0.40);
-    -moz-box-shadow: 0px 0px 53px -1px rgba(0,0,0,0.40);
-    box-shadow: 0px 0px 53px -1px rgba(0,0,0,0.40);
-    border: none !important;
-    padding: 10px;
-
-    .center-group h2 {
-      background-color: rgb(27, 27, 27);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 400;
-      padding-bottom: 5px;
-    }
-
-    .center-group p {
-      color: rgb(37, 37, 37);
-    }
-
+.computerwrapper {
     label {
       color: black;
     }
-  }
+
+    .top-margin {
+      margin-top: 150px;
+    }
 }
