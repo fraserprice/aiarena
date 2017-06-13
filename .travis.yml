@@ -14,7 +14,7 @@ install:
   - cd client && npm install
 
 script:
-  - webpack && cd ..
+  - webpack -p && cd ..
 
 deploy:
   provider: heroku
