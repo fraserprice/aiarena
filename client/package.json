@@ -54,6 +54,7 @@
   "scripts": {
     "start": "PORT=3001 react-scripts-ts start",
     "build": "rm -rf dist && webpack",
+    "prod-build": "rm -rf dist && webpack -p",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"
   }

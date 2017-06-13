@@ -2,14 +2,11 @@ import * as React from 'react';
 import Button from './Button';
 import '../css/registrationform.scss';
 import Auth from '../modules/Auth';
-import {NavLink} from 'react-router-dom';
+import Config from '../config';
+import { Redirect, Navlink } from 'react-router-dom';
 
-import {
-  Redirect,
-} from 'react-router-dom'
-
-//const loginURL = 'http://localhost:3000/login';
-const loginURL = 'https://ai-fights.herokuapp.com/login';
+const config = Config();
+const LOGIN_URL = config.hostname + '/login';
 
 class LoginForm extends React.Component<any, any> {
     constructor(props: any) {
@@ -41,7 +38,7 @@ class LoginForm extends React.Component<any, any> {
         });
         if(formValid) {
             Object.keys(form).forEach(key => form[key] = form[key].value);
-            fetch(loginURL, {
+            fetch(LOGIN_URL, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
