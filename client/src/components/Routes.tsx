@@ -10,7 +10,7 @@ import Auth from '../modules/Auth';
 const landingPage = () => {
   if (Auth.isUserAuthenticated()) {
     return (
-      <UserProfile/>
+      <UserProfile match="nouser"/>
     );
   } else {
     return (
@@ -39,6 +39,7 @@ const routes = () => {
       <Route exact path="/register" component={RegistrationForm}/>
       <Route exact path="/logout" component={Logout}/>
       <Route exact path="/editor" component={Editor}/>
+      <Route path="/:username" component={UserProfile}/>
     </Switch>
   )
 }

@@ -1,19 +1,23 @@
 import * as React from 'react';
 import '../css/profile.scss';
+import '../css/profile.scss';
 import Auth from "../modules/Auth";
 import { Redirect, NavLink } from 'react-router-dom';
 import Config from '../config';
 
 const config = Config();
-const PROFILE_URL = config.hostname + '/profile';
+const HOST_URL = config.hostname;
 
-interface UserProfileProps {}
+interface UserProfileProps {
+  match: any
+}
 
 interface UserProfileData {
   redirectToEditor: boolean;
   loaded: boolean;
   username: string;
   email: string;
+  submissions: any;
 }
 
 class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
@@ -22,8 +26,9 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     this.state = {
       redirectToEditor: false,
       loaded: false,
-      username: "loading...",
-      email: ""
+      username: props.match.params.username,
+      email: "",
+      submissions: []
     };
   }
 
@@ -190,11 +195,11 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
   loginScreen = () => {
     if(Auth.isUserAuthenticated()) {
       if (!this.state.loaded) {
-        this.getUserDetails((userDetails: any) => {
+        this.getUserState((user: any) => {
           this.setState({
             loaded: true,
-            username: JSON.parse(userDetails).username,
-            email: JSON.parse(userDetails).email
+            email: JSON.parse(user).email,
+            submissions: JSON.parse(user).submissions
           });
         });
         return this.authorizedLogin();
@@ -206,8 +211,9 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     }
   };
 
-  getUserDetails = (callback) => {
-    fetch(PROFILE_URL, {
+  getUserState = (callback: (user: any) => void) => {
+    console.log(this.state.username);
+    fetch(HOST_URL + "/user/" + this.state.username, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -218,8 +224,6 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
       return response.json();
     }).then((responseJson: any) => {
       callback(responseJson);
-    }).catch((err) => {
-      console.log(err);
     });
   };
 

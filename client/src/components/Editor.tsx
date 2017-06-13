@@ -54,6 +54,7 @@ class Editor extends React.Component<{}, EditorState> {
 
   uploadCode = () => {
     const code = this.state.code;
+    //const url = 'http://localhost:3000/python';
     fetch(CODE_SUBMIT_URL, {
       method: 'POST',
       headers: {

@@ -18,7 +18,7 @@ router.post('/', (req, res, next) => {
 
     if (!token) {
       console.log('Invalid credentials');
-      return res.sendStatus(401);
+      return res.status(401).end();
     } else {
       console.log(user);
       return res.json({

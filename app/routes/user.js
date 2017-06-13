@@ -12,14 +12,17 @@ router.get('/:username', (req, res) => {
       console.log("User not found");
       res.send(404);
     }
+
     Verification.getCurrentUser(req, (err, currentUser) => {
-      console.log("here");
-      if(err || currentUser.username !== username) {
-        console.log("Finding user's details");
+      if (err) {
+        console.log("user: unauthorized");
+        res.status(401).end();
+      }
+
+      if(currentUser.username !== username) {
         let publicUserDetails = {username: username};
         res.json(publicUserDetails);
       } else {
-        console.log("Finding your details");
         res.json(currentUser);
       }
     });
