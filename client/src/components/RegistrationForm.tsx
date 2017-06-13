@@ -1,12 +1,11 @@
 import * as React from 'react';
 import Button from './Button';
 import '../css/registrationform.scss';
-import {
-  Redirect,
-} from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import Config from '../config';
 
-//const registrationURL = 'http://localhost:3000/register';
-const registrationURL = 'https://ai-fights.herokuapp.com/register';
+const config = Config();
+const REGISTER_URL = config.hostname + '/register';
 
 interface RegistrationProps {
   uploadAccountDetails(): void
@@ -51,7 +50,7 @@ class RegistrationForm extends React.Component<RegistrationProps, RegistrationSt
       form.password.placeholder = "Passwords did not match";
     } else if(formValid) {
       Object.keys(form).forEach(key => form[key] = form[key].value);
-      fetch(registrationURL, {
+      fetch(REGISTER_URL, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

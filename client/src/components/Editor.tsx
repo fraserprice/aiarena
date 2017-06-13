@@ -6,6 +6,7 @@ import * as chessJs from 'chess.js'
 import * as io from 'socket.io-client';
 import '../css/index.scss';
 import Auth from '../modules/Auth';
+import Config from '../config';
 
 const lightSquareColor = '#2492FF'; // light blue
 const darkSquareColor = '#005EBB'; // dark blue
@@ -13,6 +14,8 @@ const darkSquareColor = '#005EBB'; // dark blue
 const flip = false;
 const squareSize = 30;
 var player = "White";
+const config = Config();
+const CODE_SUBMIT_URL = config.hostname + '/python';
 
 interface EditorState {
   code: string;
@@ -52,8 +55,7 @@ class Editor extends React.Component<{}, EditorState> {
   uploadCode = () => {
     const code = this.state.code;
     //const url = 'http://localhost:3000/python';
-    const url = 'https://ai-fights.herokuapp.com/python';
-    fetch(url, {
+    fetch(CODE_SUBMIT_URL, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
