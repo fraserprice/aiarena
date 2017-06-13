@@ -13,15 +13,16 @@ const register = require('./routes/registration');
 const login = require('./routes/login');
 const toClient = require('./routes/toclient');
 const profile = require('./routes/profile');
+const user = require('./routes/user');
+const friend = require('./routes/friend');
 
 const authMiddleware = require('./auth/auth');
 
 const app = express();
-//const dbURL = 'mongodb://localhost:27017/aiarena';
 const dbURL = 'mongodb://aiarena:mongo@ds019966.mlab.com:19966/heroku_ll75kc63'
 
 mongoose.Promise = global.Promise;
-mongoose.connect(dbURL);
+mongoose.connect(dbURL, (err) => {console.log(err);});
 require('./config/passport');
 
 app.use(cors());
@@ -48,6 +49,9 @@ app.use(sassMiddleware({
 app.use('/', express.static(path.join(__dirname, '../client/')));
 app.use('/res/', express.static(path.join(__dirname, './public/')));
 app.use('/res/profile.jpeg', express.static(path.join(__dirname, './public/')));
+app.use('/user', authMiddleware);
+app.use('/user', user);
+app.use('/friend', friend);
 app.use('/python', authMiddleware);
 app.use('/python', python);
 app.use('/profile', authMiddleware);

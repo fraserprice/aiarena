@@ -7,8 +7,8 @@ const router = express.Router();
 
 router.post('/', (req, res) => {
   console.log("pushing...");
-  var msg = req.body.payload;
-  var clientID = req.body.clientID;
+  const msg = req.body.payload;
+  const clientID = req.body.clientID;
   socket.pushToClient(clientID, "msg", msg);
   res.json({payload: "ok"});
 });

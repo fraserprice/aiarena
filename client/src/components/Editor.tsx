@@ -61,9 +61,14 @@ class Editor extends React.Component<{}, EditorState> {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + Auth.getToken()
       },
-      body: JSON.stringify({
-        payload: code,
-        clientID: this.state.socket.id })
+      body: JSON.stringify({ payload: code, clientID: this.state.socket.id })
+    }).then((response: any) => {
+      return response.json();
+    }).then((responseJson: any) => {
+      console.log("Code uploaded");
+    }).catch((err) => {
+      console.log(err.toString());
+      this.setState({res: "Error occured while executing command"});
     });
   };
 
