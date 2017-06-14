@@ -15,11 +15,13 @@ const toClient = require('./routes/toclient');
 const profile = require('./routes/profile');
 const user = require('./routes/user');
 const friend = require('./routes/friend');
+const game = require('./routes/game');
 
 const authMiddleware = require('./auth/auth');
 
 const app = express();
-const dbURL = 'mongodb://aiarena:mongo@ds019966.mlab.com:19966/heroku_ll75kc63'
+const dbURL = 'mongodb://localhost:27017/aiarena';
+//const dbURL = 'mongodb://aiarena:mongo@ds019966.mlab.com:19966/heroku_ll75kc63'
 
 mongoose.Promise = global.Promise;
 mongoose.connect(dbURL, (err) => {console.log(err);});
@@ -59,6 +61,8 @@ app.use('/profile', profile);
 app.use('/toclient', toClient);
 app.use('/register', register);
 app.use('/login', login);
+app.use('/game', authMiddleware);
+app.use('/game', game);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
