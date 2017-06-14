@@ -44,6 +44,30 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     });
   }
 
+  addGame = () => {
+    const game = { name: "GAME", type: "Chess" };
+    fetch(HOST_URL + '/game/add', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + Auth.getToken()
+          },
+          body: JSON.stringify(game)
+    }).then((response: any) => {
+      if (response.status === 200) {
+        var sub = this.state.submissions;
+        sub.push(game);
+        console.log(sub);
+        this.setState({
+          submissions: sub
+        });
+      } else {
+        alert("Error adding new game");
+      }
+    });
+  }
+
   authorizedLogin = () => {
     return (
       <div className="container" id="profile-page">
@@ -122,7 +146,14 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
                   </div>
                 </div>
                 <div className="row">
-                {this.renderGames()}
+                  {this.renderGames()}
+                  <div className="col-sm-3">
+                    <button type="button" className="play-link" onClick={this.addGame}>
+                      <div className="gamecode-pane add-code">
+                        <i className="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
+                      </div>
+                    </button>
+                  </div>
                 </div>
               </div>
               <div className="top-game-margin">
@@ -163,7 +194,8 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
       </div>
   );
 };
-authorizedFailedToGetDetails() {
+
+  authorizedFailedToGetDetails() {
     return(<p>Failed to fetch user details. Please try again.</p>)
   };
 
@@ -171,10 +203,11 @@ authorizedFailedToGetDetails() {
     if(Auth.isUserAuthenticated()) {
       if (!this.state.loaded) {
         this.getUserState((user: any) => {
+          console.log(user);
           this.setState({
             loaded: true,
-            email: JSON.parse(user).email,
-            submissions: JSON.parse(user).submissions
+            //email: JSON.parse(user).email,
+            submissions: JSON.parse(JSON.stringify(user)).submissions
           });
         });
         return this.authorizedLogin();
@@ -202,7 +235,7 @@ authorizedFailedToGetDetails() {
   };
 
   renderGames = () => {
-    const submissions = [{name: "Sub1"}, {name: "Sub2"}]; //this.state.submissions;
+    const submissions = this.state.submissions;
     var submissionHolders:any[];
     submissionHolders = [];
     for (var i = 0; i < submissions.length; i++) {
@@ -218,11 +251,12 @@ authorizedFailedToGetDetails() {
       );
     }
 
-    return (<div> {submissionHolders} </div>);
+    return (
+      <div>
+        {submissionHolders}
+      </div>
+    );
   };
-
-
-
 
   render() {
     if (this.state.redirectToEditor) {
