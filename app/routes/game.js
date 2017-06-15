@@ -4,6 +4,7 @@ const mongodb = require('mongodb');
 const passport = require('passport');
 const Submission = require('../models/submission');
 const User = require('../models/user');
+const Code = require('../models/code');
 const Verification = require('../auth/verification');
 
 router.post('/add', (req, res) => {
@@ -13,11 +14,19 @@ router.post('/add', (req, res) => {
     if (err) {
       console.log("Verification error: user not found");
       res.status(404).end();
+      return;
     }
+
+    const code = new Code();
+    code.user = currentUser.username;
+    code.code = "def main:\n\t# Start writing here";
+    code.save();
 
     const submission = new Submission;
     submission.name = name_;
     submission.type = type_;
+    console.log('creating sub with dbID: ' + code._id);
+    submission.dbID = "lol" + code._id;
 
     User.update(
       { _id: currentUser._id },

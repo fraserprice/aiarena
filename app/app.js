@@ -16,6 +16,8 @@ const profile = require('./routes/profile');
 const user = require('./routes/user');
 const friend = require('./routes/friend');
 const game = require('./routes/game');
+const code = require('./routes/code');
+const code_upload = require('./routes/code_upload');
 
 const authMiddleware = require('./auth/auth');
 
@@ -63,6 +65,10 @@ app.use('/register', register);
 app.use('/login', login);
 app.use('/game', authMiddleware);
 app.use('/game', game);
+app.use('/get', authMiddleware);
+app.use('/get', code);
+app.use('/upload', authMiddleware);
+app.use('/upload', code_upload);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

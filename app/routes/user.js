@@ -23,6 +23,7 @@ router.get('/:username', (req, res) => {
         let publicUserDetails = {username: username};
         res.json(publicUserDetails);
       } else {
+        console.log(currentUser.submissions);
         res.json(currentUser);
       }
     });
