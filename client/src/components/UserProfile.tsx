@@ -146,7 +146,11 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
                   </div>
                 </div>
                 <div className="row">
-                  {this.renderGames()}
+                  <div className="col-sm-9 games-container">
+                    <div className="row">
+                      {this.renderGames()}
+                    </div>
+                  </div>
                   <div className="col-sm-3">
                     <button type="button" className="play-link" onClick={this.addGame}>
                       <div className="gamecode-pane add-code">
@@ -240,10 +244,26 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     submissionHolders = [];
     for (var i = 0; i < submissions.length; i++) {
       submissionHolders.push(
-                   <div className="col-sm-3">
+                   <div className="col-sm-4">
                      <button type="button" className="play-link" onClick={this.play}>
                        <div className="gamecode-pane chess-pane">
-                         <h4>{submissions[i].name}</h4>
+                         <div className="row">
+                           <div className="col-sm-9 text-left">
+                             <h4>{submissions[i].name}</h4>
+                           </div>
+                           <div className="col-sm-3 delete-link">
+                             <a href="/">
+                               <i className="fa fa-times" aria-hidden="true"></i>
+                             </a>
+                           </div>
+                         </div>
+                         <div className="row">
+                           <div className="col-sm-3 col-sm-offset-9 delete-link">
+                             <a href="/">
+                               <i className="fa fa-check" aria-hidden="true"></i>
+                             </a>
+                           </div>
+                         </div>
                          <p>Modified 2 hours ago</p>
                        </div>
                      </button>

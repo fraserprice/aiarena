@@ -12,6 +12,10 @@
   font-family: monospace;
 }
 
+.game-name {
+  padding-left: 30px;
+}
+
 .chess {
   margin-top: 20px;
   text-align: center;
@@ -20,6 +24,11 @@
 .save-button {
   text-align: center;
   margin: 15px 0px;
+
+  .btn {
+    padding: 10px 30px;
+    margin-left: 20px;
+  }
 }
 
 .CodeMirror {

@@ -7,6 +7,11 @@
     border-right: 1px solid lightgrey;
   }
 
+  h3 {
+    color: #e67e22;
+  }
+
+
   .profile-name {
     font-size: 16px;
     font-weight: 500;
@@ -28,8 +33,22 @@
     background-color: rgb(221, 221, 221);
   }
 
+  .games-container {
+    height: 105px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
   .play-link {
     text-decoration: none;
+    border: none;
+    background-color: transparent;
+    width: 100%;
+
+    .delete-link {
+      z-index: 5;
+      color: black;
+    }
   }
 
   .friends-search {

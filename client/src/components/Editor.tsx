@@ -1,6 +1,6 @@
 import * as React from 'react';
 import MyCodeMirror from './MyCodemirror';
-import Button from './Button';
+import * as ReactBootstrap from 'react-bootstrap';
 import Chessdiagram from 'react-chessdiagram';
 import * as chessJs from 'chess.js'
 import * as io from 'socket.io-client';
@@ -95,11 +95,17 @@ class Editor extends React.Component<{}, EditorState> {
               <MyCodeMirror codeOnChange={this.codeOnChange} />
             </div>
             <div className="save-button">
-              <Button onClick={this.uploadCode}>Upload Code</Button>
+              <ReactBootstrap.Button bsStyle="success" onClick={this.uploadCode}>Play</ReactBootstrap.Button>
+              <ReactBootstrap.Button bsStyle="default" onClick={this.uploadCode}>Save</ReactBootstrap.Button>
+              <ReactBootstrap.Button bsStyle="danger" onClick={this.uploadCode}>Clear</ReactBootstrap.Button>
             </div>
           </div>
           <div className="col-md-6">
             <div className="row">
+              <div className="row text-center game-name">
+                <h3>Mister Worldwide vs Pitbull</h3>
+                <p>00:00</p>
+              </div>
               <div className="chess">
                 <Chessdiagram flip={flip} fen={this.state.chess.fen()} squareSize={squareSize}
                 lightSquareColor={lightSquareColor} darkSquareColor={darkSquareColor} onMovePiece={this.onMovePiece}/>
