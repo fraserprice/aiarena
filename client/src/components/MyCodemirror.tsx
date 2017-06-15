@@ -5,37 +5,30 @@ import * as Codemirror from 'react-codemirror';
 import '../css/codemirror.scss';
 require('codemirror/mode/python/python');
 
-const defaults = {
-  markdown: 'def main:\n\t# Start writing here',
-};
-
 interface MirrorState {
-  code: string;
   mode: string;
 }
 
 interface MirrorProps {
-  codeOnChange(code: string): void;
+  codeOnChange: (code: string) => void;
+  getCode: () => string
 }
 
 class MyCodemirror extends React.Component<MirrorProps, MirrorState> {
   constructor(props: MirrorProps) {
     super(props);
     this.state = {
-      code: defaults.markdown,
       mode: 'python',
     };
   }
 
   updateCode = (newCode: string) => {
-    this.setState({
-      code: newCode
-    });
-
-    this.props.codeOnChange(this.state.code);
+    this.props.codeOnChange(newCode);
   };
 
   render() {
+    console.log("rendering cm..");
+    console.log(this.props.getCode());
     const options = {
       lineNumbers: true,
       mode: this.state.mode,
@@ -44,7 +37,7 @@ class MyCodemirror extends React.Component<MirrorProps, MirrorState> {
     return (
       <Codemirror
         ref="editor"
-        value={this.state.code}
+        value={this.props.getCode()}
         onChange={this.updateCode}
         options={options}
       />

@@ -14,6 +14,7 @@ interface UserProfileProps {
 
 interface UserProfileData {
   redirectToEditor: boolean;
+  submissionToOpen: string;
   loaded: boolean;
   username: string;
   email: string;
@@ -25,6 +26,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     super(props);
     this.state = {
       redirectToEditor: false,
+      submissionToOpen: "",
       loaded: false,
       username: props.match.params.username,
       email: "",
@@ -38,14 +40,15 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     ]);
   };
 
-  play = () => {
+  play = (submissionIndex : string) => {
     this.setState({
-      redirectToEditor: true
+      redirectToEditor: true,
+      submissionToOpen: submissionIndex
     });
   }
 
   addGame = () => {
-    const game = { name: "GAME", type: "Chess" };
+    const game = { name: "GAME", type: "Chess", dbID: "" };
     fetch(HOST_URL + '/game/add', {
           method: 'POST',
           headers: {
@@ -56,14 +59,19 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
           body: JSON.stringify(game)
     }).then((response: any) => {
       if (response.status === 200) {
+        return response.json();
+      } else {
+        alert("Error adding new game");
+      }
+    }).then((response: any) => {
+      if (response !== undefined) {
         var sub = this.state.submissions;
+        game.dbID = response.dbID;
         sub.push(game);
         console.log(sub);
         this.setState({
           submissions: sub
         });
-      } else {
-        alert("Error adding new game");
       }
     });
   }
@@ -243,9 +251,11 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     var submissionHolders:any[];
     submissionHolders = [];
     for (var i = 0; i < submissions.length; i++) {
+      console.log(submissions[i].dbID);
+      const id = submissions[i].dbID;
       submissionHolders.push(
                    <div className="col-sm-4">
-                     <button type="button" className="play-link" onClick={this.play}>
+                     <button type="button" className="play-link" onClick={() => this.play(id)}>
                        <div className="gamecode-pane chess-pane">
                          <div className="row">
                            <div className="col-sm-9 text-left">
@@ -280,8 +290,10 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
 
   render() {
     if (this.state.redirectToEditor) {
+      const submissionIndex = this.state.submissionToOpen;
+      const username = this.state.username;
       return (
-        <Redirect to={{pathname: '/editor'}}/>
+        <Redirect push to={{pathname: '/' + username + '/editor/' + submissionIndex}}/>
       );
     }
 

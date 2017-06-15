@@ -38,7 +38,7 @@ const routes = () => {
       <Route exact path="/login" component={LoginForm}/>
       <Route exact path="/register" component={RegistrationForm}/>
       <Route exact path="/logout" component={Logout}/>
-      <Route exact path="/editor" component={Editor}/>
+      <Route path="/:username/editor/:submissionIndex" component={Editor}/>
       <Route path="/:username" component={UserProfile}/>
     </Switch>
   )
