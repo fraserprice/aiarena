@@ -57,17 +57,44 @@ class RegistrationForm extends React.Component<RegistrationProps, RegistrationSt
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(form)
-      }).then(response => response.json()).then(() => {
-        this.setState({redirectToUserProfile: true});
-      }).catch(() => alert('Failed!'));
+      }).then((response: any) => {
+        if (response.status !== 200) {
+          alert("Registration failed!");
+        } else {
+          return response.json();
+        }
+      }).then((response: any) => {
+        if (response !== undefined) {
+          alert(JSON.parse(JSON.stringify(response)).message);
+          this.setState({
+            redirectToUserProfile: true
+          });
+        }
+      });
     }
   };
 
   render() {
     if(this.state.redirectToUserProfile) {
-      return (<Redirect to={{pathname: '/'}}/>);
+      return (
+        <Redirect to={'/'}/>
+      );
     }
+
     return (
+      <div className="row">
+      <div className="header">
+        <div className="container-lrg">
+        <div className="col-12 spread">
+          <div className="logo">
+          <a href="/">
+           AI Arena
+          </a>
+          </div>
+        </div>
+      </div>
+ 
+      <div className="container-sml">
       <form className="registration">
         <div className="form-group">
           <label >Username</label>
@@ -88,6 +115,37 @@ class RegistrationForm extends React.Component<RegistrationProps, RegistrationSt
           <Button onClick={this.uploadAccountDetails}>Register</Button>
         </div>
       </form>
+      </div>
+      </div>
+      <div className="footer">
+            <div className="container-sml">
+              <div className="col-12 text-center">
+                <div>
+                  <a className="nav-link">
+                    About
+                  </a>
+                  <a className="nav-link">
+                    Legas
+                  </a>
+                  <a className="nav-link">
+                    Contact
+                  </a>
+                  <a className="nav-link">
+                    TOS
+                  </a>
+                  <a className="nav-link">
+                    Privacy
+                  </a>
+                </div>
+                <div>
+                  <span>
+                    Imperial Colidz
+                  </span>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
     );
   }
 }

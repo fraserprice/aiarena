@@ -2,6 +2,40 @@
   padding-bottom: 15px;
 }
 
+.header {
+  background: #e67e22;
+  color: white;
+}
+
+/*containers*/
+.container-lrg,
+.container-sml {
+  margin: auto;
+  width: 100%;
+}
+.container-lrg {
+  max-width: 1080px;
+}
+.container-sml {
+  max-width: 700px;
+}
+.ctas {
+  margin: 40px 0 0 0;
+}
+.centerdevices,
+.sidedevices {
+  position: relative;
+}.header {
+	padding: 20px 0 90px 0;
+	overflow: hidden;
+}
+.header .heading {
+	margin: 80px 0 0 0;
+}
+.header .centerdevices {
+	margin: 90px 0 0 0;
+}
+
 .center-group {
   text-align: center;
 }

@@ -34,9 +34,10 @@ passport.use('local.register', new LocalStrategy({
    newUser.encryptAndSetPassword(password, () => {
      newUser.save((err, data) => {
        if(err) {
-         return done(err);
+         return done(err, false, {message: 'Error saving user!'});
        }
-       return done(null, newUser);
+
+       return done(null, newUser, {message: 'Success'});
      });
    });
   });
