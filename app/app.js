@@ -22,8 +22,8 @@ const code_upload = require('./routes/code_upload');
 const authMiddleware = require('./auth/auth');
 
 const app = express();
-const dbURL = 'mongodb://localhost:27017/aiarena';
-//const dbURL = 'mongodb://aiarena:mongo@ds019966.mlab.com:19966/heroku_ll75kc63'
+//const dbURL = 'mongodb://localhost:27017/aiarena';
+const dbURL = 'mongodb://aiarena:mongo@ds019966.mlab.com:19966/heroku_ll75kc63'
 
 mongoose.Promise = global.Promise;
 mongoose.connect(dbURL, (err) => {console.log(err);});

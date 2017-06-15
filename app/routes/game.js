@@ -26,7 +26,7 @@ router.post('/add', (req, res) => {
     submission.name = name_;
     submission.type = type_;
     console.log('creating sub with dbID: ' + code._id);
-    submission.dbID = "lol" + code._id;
+    submission.dbID = code._id;
 
     User.update(
       { _id: currentUser._id },
@@ -36,7 +36,7 @@ router.post('/add', (req, res) => {
       }
     );
 
-    res.status(200).end();
+    res.status(200).json({dbID: submission.dbID});
   });
 });
 

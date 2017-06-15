@@ -48,7 +48,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
   }
 
   addGame = () => {
-    const game = { name: "GAME", type: "Chess" };
+    const game = { name: "GAME", type: "Chess", dbID: "" };
     fetch(HOST_URL + '/game/add', {
           method: 'POST',
           headers: {
@@ -59,14 +59,19 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
           body: JSON.stringify(game)
     }).then((response: any) => {
       if (response.status === 200) {
+        return response.json();
+      } else {
+        alert("Error adding new game");
+      }
+    }).then((response: any) => {
+      if (response !== undefined) {
         var sub = this.state.submissions;
+        game.dbID = response.dbID;
         sub.push(game);
         console.log(sub);
         this.setState({
           submissions: sub
         });
-      } else {
-        alert("Error adding new game");
       }
     });
   }
