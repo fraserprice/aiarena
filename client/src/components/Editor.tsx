@@ -15,24 +15,35 @@ const flip = false;
 const squareSize = 30;
 var player = "White";
 const config = Config();
-const CODE_SUBMIT_URL = config.hostname + '/python';
+const CODE_UPLOAD_URL = config.hostname + '/upload/code';
+const CODE_GET_URL = config.hostname + '/get/code';
 
 interface EditorState {
-  code: string;
+  loaded: boolean;
+  username: string;
+  submissionIndex : string;
   res: string;
   chess: any;
   socket: any;
+  code: string;
 }
 
-class Editor extends React.Component<{}, EditorState> {
-  constructor() {
-    super();
+interface EditorProps {
+  match: any
+}
+
+class Editor extends React.Component<EditorProps, EditorState> {
+  constructor(props: EditorProps) {
+    super(props);
     var gc = new chessJs();
     this.state = {
-      code: '',
+      loaded: false,
+      username: props.match.params.username,
+      submissionIndex: props.match.params.submissionIndex,
       res: 'Game history\n',
       chess: gc,
       socket: io(),
+      code: 'def main:\n\t# Start writing here'
     };
 
     this.state.socket.on("msg", this.resOnReceive);
@@ -48,28 +59,26 @@ class Editor extends React.Component<{}, EditorState> {
     });
   };
 
+  getCode = () => this.state.code;
+
   resOnReceive = (msg: string) => {
     this.onMovePiece(null, null, msg);
   };
 
   uploadCode = () => {
     const code = this.state.code;
-    //const url = 'http://localhost:3000/python';
-    fetch(CODE_SUBMIT_URL, {
+    fetch(CODE_UPLOAD_URL, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + Auth.getToken()
       },
-      body: JSON.stringify({ payload: code, clientID: this.state.socket.id })
+      body: JSON.stringify({ new_code: code, dbID: this.state.submissionIndex })
     }).then((response: any) => {
-      return response.json();
-    }).then((responseJson: any) => {
-      console.log("Code uploaded");
-    }).catch((err) => {
-      console.log(err.toString());
-      this.setState({res: "Error occured while executing command"});
+      if (response.status !== 200) {
+        alert("Code upload failed!");
+      }
     });
   };
 
@@ -84,15 +93,50 @@ class Editor extends React.Component<{}, EditorState> {
     if (this.state.chess.game_over()) {
       this.setState({res: "Game over"});
     }
-  }
+  };
+
+  renderCodeMirror = () => {
+    if (this.state.loaded) {
+      return (
+        <MyCodeMirror codeOnChange={this.codeOnChange} getCode={this.getCode} />
+      );
+    } else {
+      return(<div></div>);
+    }
+  };
 
   render() {
+    if (Auth.isUserAuthenticated) {
+      if (!this.state.loaded) {
+        console.log("Getting code with dbID: " + this.state.submissionIndex);
+        const req = { dbID: this.state.submissionIndex };
+        fetch(CODE_GET_URL, {
+              method: 'POST',
+              headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + Auth.getToken()
+              },
+              body: JSON.stringify(req)
+        }).then((response: any) => {
+          return response.json();
+        }).then((response: any) => {
+          console.log(JSON.parse(JSON.stringify(response)).raw_code);
+          this.setState({
+            loaded: true,
+            code: JSON.parse(JSON.stringify(response)).raw_code
+          });
+        });
+      }
+    }
+
     return (
       <div>
         <div className="row">
           <div className="col-md-5 col-md-offset-1">
+            <div> <h3> {this.state.username} </h3> </div>
             <div className="cm">
-              <MyCodeMirror codeOnChange={this.codeOnChange} />
+              {this.renderCodeMirror()}
             </div>
             <div className="save-button">
               <Button onClick={this.uploadCode}>Upload Code</Button>

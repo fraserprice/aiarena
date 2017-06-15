@@ -14,6 +14,7 @@ interface UserProfileProps {
 
 interface UserProfileData {
   redirectToEditor: boolean;
+  submissionToOpen: string;
   loaded: boolean;
   username: string;
   email: string;
@@ -25,6 +26,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     super(props);
     this.state = {
       redirectToEditor: false,
+      submissionToOpen: "",
       loaded: false,
       username: props.match.params.username,
       email: "",
@@ -38,9 +40,10 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     ]);
   };
 
-  play = () => {
+  play = (submissionIndex : string) => {
     this.setState({
-      redirectToEditor: true
+      redirectToEditor: true,
+      submissionToOpen: submissionIndex
     });
   }
 
@@ -239,9 +242,11 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     var submissionHolders:any[];
     submissionHolders = [];
     for (var i = 0; i < submissions.length; i++) {
+      console.log(submissions[i].dbID);
+      const id = submissions[i].dbID;
       submissionHolders.push(
                    <div className="col-sm-3">
-                     <button type="button" className="play-link" onClick={this.play}>
+                     <button type="button" className="play-link" onClick={() => this.play(id)}>
                        <div className="gamecode-pane chess-pane">
                          <h4>{submissions[i].name}</h4>
                          <p>Modified 2 hours ago</p>
@@ -260,8 +265,10 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
 
   render() {
     if (this.state.redirectToEditor) {
+      const submissionIndex = this.state.submissionToOpen;
+      const username = this.state.username;
       return (
-        <Redirect to={{pathname: '/editor'}}/>
+        <Redirect push to={{pathname: '/' + username + '/editor/' + submissionIndex}}/>
       );
     }
 
