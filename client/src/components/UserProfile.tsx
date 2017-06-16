@@ -138,7 +138,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     }
 
     if (index !== -1) {
-      submissions.slice(index, 1);
+      submissions.splice(index, 1);
     } else {
       alert("Delete game: unable to delete locally, refresh the page");
     }
@@ -168,7 +168,9 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
   }
 
   setMainLocal = (dbID: string) => {
-    //TODO
+    this.setState({
+      mainSubmission: dbID
+    });
   }
 
   addGame = () => {
