@@ -3,6 +3,8 @@ const User = require('../models/user');
 const LocalStrategy = require('passport-local').Strategy;
 const jwt = require('jsonwebtoken');
 const config = require('./config');
+const Submission = require('../models/submission');
+const Friend = require('../models/friend');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -28,9 +30,23 @@ passport.use('local.register', new LocalStrategy({
      console.log("username in use - " + user.username);
      return done(null, false, {message: 'Email or username in use'});
    }
+
+   const default_submission = new Submission();
+   default_submission.name = "Chess ex.";
+   default_submission.type = "Chess";
+   default_submission.dbID = "5943a1f8e66845002762bdd1";
+
+   const default_friend = new Friend();
+   default_friend.name = "AI_Bot";
+   default_friend.uid = "5943a3b8e2811500277f0a2d";
+   default_friend.main = "5943a9c0e2811500277f0a2e";
+
    const newUser = new User();
    newUser.username = username;
    newUser.email = req.body.email;
+   newUser.submissions = [default_submission];
+   newUser.friends = [default_friend];
+   newUser.mainSubmission = "5943a1f8e66845002762bdd1";
    newUser.encryptAndSetPassword(password, () => {
      newUser.save((err, data) => {
        if(err) {
