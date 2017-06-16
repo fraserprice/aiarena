@@ -87,14 +87,12 @@ class RegistrationForm extends React.Component<RegistrationProps, RegistrationSt
         <div className="container-lrg">
         <div className="col-12 spread">
           <div className="logo">
-          <a href="/">
            AI Arena
-          </a>
           </div>
         </div>
       </div>
- 
-      <div className="container-sml">
+
+      <div className="container-sml the-thing">
       <form className="registration">
         <div className="form-group">
           <label >Username</label>

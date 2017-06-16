@@ -404,16 +404,14 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
       const name = submissions[i].name;
       submissionHolders.push(
         <div className="col-sm-4">
-          <button type="button" className="play-link" onClick={() => this.play(id)}>
+          <div className="play-link">
             <div className="gamecode-pane chess-pane">
               <div className="row">
                 <div className="col-sm-9 text-left">
-                  <h4>{submissions[i].name}</h4>
+                <a onClick={() => this.play(id)}><h4>{submissions[i].name}</h4></a>
                 </div>
-
               {this.checkExampleSub(name, id)}
               </div>
-
               <div className="row">
                 <div className="col-sm-3 col-sm-offset-9 delete-link">
                   <a onClick={() => this.setMain(id)}>
@@ -421,10 +419,9 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
                   </a>
                 </div>
               </div>
-
               <p>Modified 2 hours ago</p>
             </div>
-          </button>
+          </div>
         </div>
       );
     }

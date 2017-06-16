@@ -6,6 +6,10 @@ body {
   // background: linear-gradient(to right, #EC6F66, #F3A183) !important;
 }
 
+a {
+  cursor: pointer !important;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
