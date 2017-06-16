@@ -273,20 +273,19 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
                 <div className="row">
                   <div className="col-sm-3">
                     <div className="gamecode-pane pawn-pane">
-                      <h4>pawn.py</h4>
+                      <h4><div id="pawn">pawn.py</div></h4>
                       <p>Modified 12 hours ago</p>
                     </div>
                   </div>
                   <div className="col-sm-3">
                     <div className="gamecode-pane pawn-pane">
-                      <h4>pawn2.py</h4>
+                      <h4><div id="pawn">pawn2.py</div></h4>
                       <p>Modified 6 days ago</p>
                     </div>
                   </div>
                   <div className="col-sm-3">
                     <div className="gamecode-pane pawn-pane">
-                      <h4>pawn3.py</h4>
-                      <p>Modified 5 weeks ago</p>
+                      <h4><div id="pawn">pawn3.py</div></h4>
                     </div>
                   </div>
                   <div className="col-sm-3">
@@ -383,6 +382,21 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     );
   };
 
+
+  checkExampleSub = (name: string, id: string) => {
+    if (name === "Chess ex.") {
+      return;
+    } else {
+      return (
+        <div className="col-sm-3 delete-link">
+          <a onClick={() => this.deleteGame(name, id)}>
+            <i className="fa fa-times" aria-hidden="true"></i>
+          </a>
+        </div>
+      );
+    }
+  };
+
   renderGames = () => {
     const submissions = this.state.submissions;
     var submissionHolders:any[];
@@ -399,11 +413,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
                   <h4>{submissions[i].name}</h4>
                 </div>
 
-                <div className="col-sm-3 delete-link">
-                  <a onClick={() => this.deleteGame(name, id)}>
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                  </a>
-                </div>
+              {this.checkExampleSub(name, id)}
               </div>
 
               <div className="row">
