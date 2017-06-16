@@ -22,13 +22,14 @@ router.post('/', (req, res) => {
 
         const myJSONObject = { payload : code.code, clientID : clientID };
         request({
+            //url: "http://localhost:8080/python",
             url: "http://ec2-52-91-239-221.compute-1.amazonaws.com:8080/python",
             method: "POST",
             json: true,
             body: myJSONObject
           }, function (error, response, body) {
             //console.log(JSON.stringify(body));
-            //return res.json({payload: JSON.stringify(body)});
+            return res.json({payload: JSON.stringify(body)});
         });
 
         res.status(200).end();
