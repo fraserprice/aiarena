@@ -21,6 +21,8 @@ interface EditorState {
   loaded: boolean;
   username: string;
   submissionIndex : string;
+  enemyID: string;
+  enemyName: string;
   res: string;
   chess: any;
   socket: any;
@@ -39,6 +41,8 @@ class Editor extends React.Component<EditorProps, EditorState> {
       loaded: false,
       username: props.match.params.username,
       submissionIndex: props.match.params.submissionIndex,
+      enemyID: props.match.params.enemyID,
+      enemyName: props.match.params.enemyName,
       res: 'Game history\n',
       chess: gc,
       socket: io(),
@@ -133,7 +137,6 @@ class Editor extends React.Component<EditorProps, EditorState> {
       <div>
         <div className="row">
           <div className="col-md-5 col-md-offset-1">
-            <div> <h3> {this.state.username} </h3> </div>
             <div className="cm">
               {this.renderCodeMirror()}
             </div>
@@ -146,7 +149,7 @@ class Editor extends React.Component<EditorProps, EditorState> {
           <div className="col-md-6">
             <div className="row">
               <div className="row text-center game-name">
-                <h3>Mister Worldwide vs Pitbull</h3>
+                <h3>{this.state.username} vs {this.state.enemyName} </h3>
                 <p>00:00</p>
               </div>
               <div className="chess">

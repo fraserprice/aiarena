@@ -21,6 +21,9 @@ interface UserProfileData {
   friends: any;
   mainSubmission: string;
   friendSearchValue: string;
+  challengeUser: boolean;
+  enemyID: string;
+  enemyName: string;
 }
 
 class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
@@ -35,7 +38,10 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
       submissions: [],
       friends: [],
       mainSubmission: "",
-      friendSearchValue: ""
+      friendSearchValue: "",
+      challengeUser: false,
+      enemyID: "",
+      enemyName: ""
     };
   }
 
@@ -338,22 +344,13 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     });
   };
 
-  getUserName = (userID: string) => {
-    var name = "";
-    fetch(HOST_URL + "/auth/get/name/" + userID, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + Auth.getToken()
-      }
-    }).then((response: any) => {
-      return response.json();
-    }).then((responseJson: any) => {
-      name = JSON.parse(JSON.stringify(responseJson)).name;
+  challengeUser = (enemyID: string, enemyName: string) => {
+    this.setState({
+      enemyID: enemyID,
+      enemyName: enemyName,
+      challengeUser: true,
+      redirectToEditor: true
     });
-
-    return name;
   };
 
   renderFriends = () => {
@@ -370,7 +367,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
             <p>{name}</p>
           </div>
           <div className="col-sm-5">
-            <a onClick={() => this.play(id)}>Challenge</a>
+            <a onClick={() => this.challengeUser(id, name)}>Challenge</a>
           </div>
           <div className="col-sm-2">
             <div className="online-dot" aria-hidden="true"></div>
@@ -391,7 +388,6 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     var submissionHolders:any[];
     submissionHolders = [];
     for (var i = 0; i < submissions.length; i++) {
-      console.log(submissions[i].dbID);
       const id = submissions[i].dbID;
       const name = submissions[i].name;
       submissionHolders.push(
@@ -436,9 +432,19 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     if (this.state.redirectToEditor) {
       const submissionIndex = this.state.submissionToOpen;
       const username = this.state.username;
-      return (
-        <Redirect push to={{pathname: '/' + username + '/editor/' + submissionIndex}}/>
-      );
+      if (!this.state.challengeUser) {
+        return (
+          <Redirect push to={'/' + username + '/editor/' + submissionIndex + "/none/none"}/>
+        );
+      } else {
+        const enemyID = this.state.enemyID;
+        const enemyName = this.state.enemyName;
+        const mainSubmission = this.state.mainSubmission;
+        console.log("challenge");
+        return (
+          <Redirect push to={'/' + username + '/editor/' + mainSubmission + "/" + enemyID + "/" + enemyName}/>
+        );
+      }
     }
 
     return (
