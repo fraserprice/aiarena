@@ -16,6 +16,7 @@ var player = "White";
 const config = Config();
 const CODE_ADD_URL = config.hostname + '/auth/add/code';
 const CODE_GET_URL = config.hostname + '/auth/get/code';
+const PLAY_URL = config.hostname + '/auth/play';
 
 interface EditorState {
   loaded: boolean;
@@ -68,6 +69,10 @@ class Editor extends React.Component<EditorProps, EditorState> {
     this.onMovePiece(null, null, msg);
   };
 
+  clearCode = () => {
+    this.codeOnChange("");
+  }
+
   uploadCode = () => {
     const code = this.state.code;
     fetch(CODE_ADD_URL, {
@@ -84,6 +89,24 @@ class Editor extends React.Component<EditorProps, EditorState> {
       }
     });
   };
+
+  play = () => {
+    const enemyID = this.state.enemyID;
+    const req = { enemyID: enemyID, codeID: this.state.submissionIndex, clientID: this.state.socket.id }
+    fetch(PLAY_URL, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + Auth.getToken()
+      },
+      body: JSON.stringify(req)
+    }).then((response: any) => {
+      if (response.status !== 200) {
+        alert("Error: unable to play!");
+      }
+    });
+  }
 
   onMovePiece = (piece: any, fromSquare: any, toSquare: any) => {
     this.state.chess.move(fromSquare+toSquare, {sloppy: true});
@@ -141,9 +164,9 @@ class Editor extends React.Component<EditorProps, EditorState> {
               {this.renderCodeMirror()}
             </div>
             <div className="save-button">
-              <ReactBootstrap.Button bsStyle="success" onClick={this.uploadCode}>Play</ReactBootstrap.Button>
+              <ReactBootstrap.Button bsStyle="success" onClick={this.play}>Play</ReactBootstrap.Button>
               <ReactBootstrap.Button bsStyle="default" onClick={this.uploadCode}>Save</ReactBootstrap.Button>
-              <ReactBootstrap.Button bsStyle="danger" onClick={this.uploadCode}>Clear</ReactBootstrap.Button>
+              <ReactBootstrap.Button bsStyle="danger">Clear</ReactBootstrap.Button>
             </div>
           </div>
           <div className="col-md-6">

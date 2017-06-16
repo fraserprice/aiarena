@@ -223,7 +223,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
                 <div className="row friends-search">
                   <div className="col-sm-12">
                     <div className="input-group">
-                      <input type="text" className="form-control" placeholder="Search for friends" onChange={this.updateFriendSearch}></input>
+                      <input type="text" className="form-control" placeholder="Type a friend's name..." onChange={this.updateFriendSearch}></input>
                       <span className="input-group-btn">
                         <button className="btn btn-default" type="button" onClick={this.addFriend}><i className="fa fa-plus" aria-hidden="true"></i></button>
                       </span>
@@ -274,13 +274,11 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
                   <div className="col-sm-3">
                     <div className="gamecode-pane pawn-pane">
                       <h4><div id="pawn">pawn.py</div></h4>
-                      <p>Modified 12 hours ago</p>
                     </div>
                   </div>
                   <div className="col-sm-3">
                     <div className="gamecode-pane pawn-pane">
                       <h4><div id="pawn">pawn2.py</div></h4>
-                      <p>Modified 6 days ago</p>
                     </div>
                   </div>
                   <div className="col-sm-3">
