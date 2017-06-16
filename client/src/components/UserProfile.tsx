@@ -138,7 +138,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     }
 
     if (index !== -1) {
-      submissions.slice(index, 1);
+      submissions.splice(index, 1);
     } else {
       alert("Delete game: unable to delete locally, refresh the page");
     }
@@ -197,6 +197,46 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
           submissions: sub
         });
       }
+    });
+  }
+
+  renameGame = (dbID: string, name:string) => {
+    const req = { new_name: name, dbID: dbID };
+    fetch(HOST_URL + '/auth/add/rename', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + Auth.getToken()
+          },
+          body: JSON.stringify(req)
+    }).then((response: any) => {
+      if (response.status !== 200) {
+        alert("Delete game: operation failed");
+      } else {
+        this.renameGameLocal(dbID, name);
+      }
+    });
+  }
+
+  renameGameLocal = (dbID: string, name:string) => {
+    var submissions: any = this.state.submissions;
+    var index: number = -1;
+    for (var i: number = 0; i < submissions.length; i++) {
+      if (submissions[i].dbID === dbID) {
+        index = i;
+        break;
+      }
+    }
+
+    if (index !== -1) {
+      submissions[index].name = name;
+    } else {
+      alert("Delete game: unable to rename, refresh the page");
+    }
+
+    this.setState({
+      submissions: submissions
     });
   }
 
@@ -416,6 +456,11 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
                 <div className="col-sm-3 col-sm-offset-9 delete-link">
                   <a onClick={() => this.setMain(id)}>
                     <i className="fa fa-check" aria-hidden="true"></i>
+                  </a>
+                </div>
+                <div className="col-sm-3 col-sm-offset-9 delete-link">
+                  <a onClick={() => this.renameGame(id, 'hhue')}>
+                    <i className="fa fa-pencil" aria-hidden="true"></i>
                   </a>
                 </div>
               </div>
