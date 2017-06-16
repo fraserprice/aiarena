@@ -8,7 +8,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const mongo = require('mongodb');
 const passport = require('passport');
-const python = require('./routes/python');
+const play = require('./routes/play');
 const register = require('./routes/registration');
 const login = require('./routes/login');
 const toClient = require('./routes/toclient');
@@ -61,7 +61,7 @@ app.use('/toclient', toClient);
 
 app.use('/auth', authMiddleware);
 app.use('/auth/friend', friend);
-app.use('/auth/python', python);
+app.use('/auth/play', play);
 app.use('/auth/get', code_download);
 app.use('/auth/get', user);
 app.use('/auth/get', profile);
