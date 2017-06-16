@@ -10,13 +10,12 @@ import Config from '../config';
 
 const lightSquareColor = '#2492FF'; // light blue
 const darkSquareColor = '#005EBB'; // dark blue
-//const currentPosition =  'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'; // starting position
 const flip = false;
 const squareSize = 30;
 var player = "White";
 const config = Config();
-const CODE_UPLOAD_URL = config.hostname + '/upload/code';
-const CODE_GET_URL = config.hostname + '/get/code';
+const CODE_ADD_URL = config.hostname + '/auth/add/code';
+const CODE_GET_URL = config.hostname + '/auth/get/code';
 
 interface EditorState {
   loaded: boolean;
@@ -67,7 +66,7 @@ class Editor extends React.Component<EditorProps, EditorState> {
 
   uploadCode = () => {
     const code = this.state.code;
-    fetch(CODE_UPLOAD_URL, {
+    fetch(CODE_ADD_URL, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

@@ -5,7 +5,6 @@ import '../css/main.scss'
 import '../css/devices.scss'
 import Button from './Button';
 import { Redirect, NavLink } from 'react-router-dom';
-//const loginURL = 'http://localhost:3000/login';
 import Config from '../config';
 const config = Config();
 const LOGIN_URL = config.hostname + '/login';

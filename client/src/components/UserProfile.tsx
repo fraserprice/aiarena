@@ -1,6 +1,5 @@
 import * as React from 'react';
 import '../css/profile.scss';
-import '../css/profile.scss';
 import Auth from "../modules/Auth";
 import { Redirect, NavLink } from 'react-router-dom';
 import Config from '../config';
@@ -19,6 +18,9 @@ interface UserProfileData {
   username: string;
   email: string;
   submissions: any;
+  friends: any;
+  mainSubmission: string;
+  friendSearchValue: string;
 }
 
 class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
@@ -30,7 +32,10 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
       loaded: false,
       username: props.match.params.username,
       email: "",
-      submissions: []
+      submissions: [],
+      friends: [],
+      mainSubmission: "",
+      friendSearchValue: ""
     };
   }
 
@@ -41,15 +46,97 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
   };
 
   play = (submissionIndex : string) => {
+  mainSubmissionName = () => {
+    const mainID = this.state.mainSubmission;
+    if (mainID === "" || mainID === undefined) {
+      return "none";
+    }
+
+    const submissions = this.state.submissions;
+    for (var i = 0; i < submissions.length; i++) {
+      if (submissions[i].dbID == mainID) {
+        return submissions[i].name;
+      }
+    }
+
+    return "none";
+  }
+
+  play = (submissionIndex: string) => {
     this.setState({
       redirectToEditor: true,
       submissionToOpen: submissionIndex
     });
   }
 
+
+
+  deleteGame = (name: string, dbID: string) => {
+    const req = { name: name, dbID: dbID };
+    fetch(HOST_URL + '/auth/del/submission', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + Auth.getToken()
+          },
+          body: JSON.stringify(req)
+    }).then((response: any) => {
+      if (response.status !== 200) {
+        alert("Delete game: operation failed");
+      } else {
+        this.deleteGameLocal(dbID);
+      }
+    });
+  }
+
+  deleteGameLocal = (dbID: string) => {
+    var submissions: any = this.state.submissions;
+    var index: number = -1;
+    for (var i: number = 0; i < submissions.length; i++) {
+      if (submissions[i].dbID === dbID) {
+        index = i;
+        break;
+      }
+    }
+
+    if (index !== -1) {
+      submissions.slice(index, 1);
+    } else {
+      alert("Delete game: unable to delete locally, refresh the page");
+    }
+
+    this.setState({
+      submissions: submissions
+    });
+  }
+
+  setMain = (dbID: string) => {
+    const req = { dbID: dbID };
+    fetch(HOST_URL + '/auth/set/main-submission', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + Auth.getToken()
+          },
+          body: JSON.stringify(req)
+    }).then((response: any) => {
+      if (response.status !== 200) {
+        alert("error setting main submission");
+      } else {
+        this.setMainLocal(dbID);
+      }
+    });
+  }
+
+  setMainLocal = (dbID: string) => {
+    //TODO
+  }
+
   addGame = () => {
     const game = { name: "GAME", type: "Chess", dbID: "" };
-    fetch(HOST_URL + '/game/add', {
+    fetch(HOST_URL + '/auth/add/submission', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -81,6 +168,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
       <div className="container" id="profile-page">
         <div className="row">
           <div className="col-md-3">
+
             <div className="row">
                 <div className="col-md-4 profile-pic">
                 </div>
@@ -232,7 +320,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
   };
 
   getUserState = (callback: (user: any) => void) => {
-    fetch(HOST_URL + "/user/" + this.state.username, {
+    fetch(HOST_URL + "/auth/get/user/" + this.state.username, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -253,31 +341,35 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     for (var i = 0; i < submissions.length; i++) {
       console.log(submissions[i].dbID);
       const id = submissions[i].dbID;
+      const name = submissions[i].name;
       submissionHolders.push(
-                   <div className="col-sm-4">
-                     <button type="button" className="play-link" onClick={() => this.play(id)}>
-                       <div className="gamecode-pane chess-pane">
-                         <div className="row">
-                           <div className="col-sm-9 text-left">
-                             <h4>{submissions[i].name}</h4>
-                           </div>
-                           <div className="col-sm-3 delete-link">
-                             <a href="/">
-                               <i className="fa fa-times" aria-hidden="true"></i>
-                             </a>
-                           </div>
-                         </div>
-                         <div className="row">
-                           <div className="col-sm-3 col-sm-offset-9 delete-link">
-                             <a href="/">
-                               <i className="fa fa-check" aria-hidden="true"></i>
-                             </a>
-                           </div>
-                         </div>
-                         <p>Modified 2 hours ago</p>
-                       </div>
-                     </button>
-                   </div>
+        <div className="col-sm-4">
+          <button type="button" className="play-link" onClick={() => this.play(id)}>
+            <div className="gamecode-pane chess-pane">
+              <div className="row">
+                <div className="col-sm-9 text-left">
+                  <h4>{submissions[i].name}</h4>
+                </div>
+
+                <div className="col-sm-3 delete-link">
+                  <a onClick={() => this.deleteGame(name, id)}>
+                    <i className="fa fa-times" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-sm-3 col-sm-offset-9 delete-link">
+                  <a onClick={() => this.setMain(id)}>
+                    <i className="fa fa-check" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+
+              <p>Modified 2 hours ago</p>
+            </div>
+          </button>
+        </div>
       );
     }
 
