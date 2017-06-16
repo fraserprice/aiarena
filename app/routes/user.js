@@ -5,12 +5,13 @@ const passport = require('passport');
 const User = require('../models/user');
 const Verification = require('../auth/verification');
 
-router.get('/:username', (req, res) => {
+router.get('/user/:username', (req, res) => {
   const username = req.params.username;
   User.findOne({'username': username}, (err, user) => {
     if(err) {
       console.log("User not found");
       res.send(404);
+      return;
     }
 
     Verification.getCurrentUser(req, (err, currentUser) => {

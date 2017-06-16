@@ -15,8 +15,10 @@ const toClient = require('./routes/toclient');
 const profile = require('./routes/profile');
 const user = require('./routes/user');
 const friend = require('./routes/friend');
-const game = require('./routes/game');
-const code = require('./routes/code');
+const submission = require('./routes/add_submission');
+const submission_delete = require('./routes/delete_submission');
+const submission_setmain = require('./routes/setmain_submission');
+const code_download = require('./routes/code_download');
 const code_upload = require('./routes/code_upload');
 
 const authMiddleware = require('./auth/auth');
@@ -53,22 +55,20 @@ app.use(sassMiddleware({
 app.use('/', express.static(path.join(__dirname, '../client/')));
 app.use('/res/', express.static(path.join(__dirname, './public/')));
 app.use('/res/profile.jpeg', express.static(path.join(__dirname, './public/')));
-app.use('/user', authMiddleware);
-app.use('/user', user);
-app.use('/friend', friend);
-app.use('/python', authMiddleware);
-app.use('/python', python);
-app.use('/profile', authMiddleware);
-app.use('/profile', profile);
-app.use('/toclient', toClient);
 app.use('/register', register);
 app.use('/login', login);
-app.use('/game', authMiddleware);
-app.use('/game', game);
-app.use('/get', authMiddleware);
-app.use('/get', code);
-app.use('/upload', authMiddleware);
-app.use('/upload', code_upload);
+app.use('/toclient', toClient);
+
+app.use('/auth', authMiddleware);
+app.use('/auth/friend', friend);
+app.use('/auth/python', python);
+app.use('/auth/get', code_download);
+app.use('/auth/get', user);
+app.use('/auth/get', profile);
+app.use('/auth/add', code_upload);
+app.use('/auth/add', submission);
+app.use('/auth/del', submission_delete);
+app.use('/auth/set', submission_setmain);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

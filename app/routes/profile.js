@@ -4,7 +4,7 @@ const mongodb = require('mongodb');
 const passport = require('passport');
 const Verification = require('../auth/verification');
 
-router.get('/', (req, res) => {
+router.get('/profile', (req, res) => {
   const user = Verification.getCurrentUser(req, (err, user) => {
     console.log(user);
     res.json(JSON.stringify(user));

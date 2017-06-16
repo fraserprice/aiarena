@@ -8,7 +8,6 @@ const User = require('../models/user');
 const Verification = require('../auth/verification');
 
 router.post('/code', (req, res) => {
-  console.log("sending code..");
   Verification.getCurrentUser(req, (err, currentUser) => {
     if (err) {
       console.log("Verification error: user not found");

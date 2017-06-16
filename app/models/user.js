@@ -3,14 +3,17 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 const SubmissionModel = require('./submission');
 const Submission = require('mongoose').model('Submission').schema;
+const FriendModel = require('./friend');
+const Friend = require('mongoose').model('Friend').schema;
 
 const userSchema = new Schema({
   username: {type: String, required: true},
   email: {type: String, required: true},
   password: {type: String, required: true},
   pendingFriendRequests: [String],
-  friends: [String],
+  friends: [Friend],
   submissions: [Submission],
+  mainSubmission: String,
   currentGame: {active: Boolean, id: Number}
 });
 
