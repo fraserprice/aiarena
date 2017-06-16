@@ -13,6 +13,7 @@ const register = require('./routes/registration');
 const login = require('./routes/login');
 const toClient = require('./routes/toclient');
 const profile = require('./routes/profile');
+const rename = require('./routes/rename');
 const user = require('./routes/user');
 const friend = require('./routes/friend');
 const submission = require('./routes/add_submission');
@@ -67,6 +68,7 @@ app.use('/auth/get', user);
 app.use('/auth/get', profile);
 app.use('/auth/add', code_upload);
 app.use('/auth/add', submission);
+app.use('/auth/add', rename);
 app.use('/auth/del', submission_delete);
 app.use('/auth/set', submission_setmain);
 
