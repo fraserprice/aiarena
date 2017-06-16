@@ -45,7 +45,6 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     ]);
   };
 
-  play = (submissionIndex : string) => {
   mainSubmissionName = () => {
     const mainID = this.state.mainSubmission;
     if (mainID === "" || mainID === undefined) {
@@ -69,6 +68,38 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     });
   }
 
+  updateFriendSearch = (e) => {
+    this.setState({
+      friendSearchValue: e.target.value
+    });
+  }
+
+  addFriend = () => {
+    const name = this.state.friendSearchValue;
+    fetch(HOST_URL + '/auth/friend/add/' + name, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + Auth.getToken()
+          }
+    }).then((response: any) => {
+      if (response.status !== 200) {
+        alert("Failed adding friend");
+      } else {
+        return response.json();
+      }
+    }).then((response: any) => {
+      if (response !== undefined) {
+        var friends = this.state.friends;
+        console.log(response);
+        friends.push(response);
+        this.setState({
+          friends: friends
+        });
+      }
+    });
+  };
 
 
   deleteGame = (name: string, dbID: string) => {
@@ -178,58 +209,29 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
                     <p><NavLink to="/logout">Log Out</NavLink></p>
                   </div>
             </div>
+
             <div className="row">
               <div className="divide-pane custom-pane friends-pane">
                 <h3>Friends</h3>
-                <div className="row">
-                  <div className="col-sm-5">
-                    <p>Zaniel Dvara</p>
-                  </div>
-                  <div className="col-sm-5">
-                    <a href="/challenge">Challenge</a>
-                  </div>
-                  <div className="col-sm-2">
-                    <div className="online-dot" aria-hidden="true"></div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-sm-5">
-                    <p>Keter Povary</p>
-                  </div>
-                  <div className="col-sm-5">
-                    <a href="/challenge">Challenge</a>
-                  </div>
-                  <div className="col-sm-2">
-                    <div className="offline-dot" aria-hidden="true"></div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-sm-5">
-                    <p>Someone Else</p>
-                  </div>
-                  <div className="col-sm-5">
-                    <a href="/challenge">Challenge</a>
-                  </div>
-                  <div className="col-sm-2">
-                    <div className="offline-dot" aria-hidden="true"></div>
-                  </div>
-                </div>
+                  {this.renderFriends()}
                 <div className="row friends-search">
                   <div className="col-sm-12">
                     <div className="input-group">
-                      <input type="text" className="form-control" placeholder="Search for friends"></input>
+                      <input type="text" className="form-control" placeholder="Search for friends" onChange={this.updateFriendSearch}></input>
                       <span className="input-group-btn">
-                        <button className="btn btn-default" type="button"><i className="fa fa-search" aria-hidden="true"></i></button>
+                        <button className="btn btn-default" type="button" onClick={this.addFriend}><i className="fa fa-plus" aria-hidden="true"></i></button>
                       </span>
                     </div>
                   </div>
                 </div>
               </div>
+
               <div className="divide-pane custom-pane stats-pane">
                 <h3>Statistics</h3>
                 <p>Games played : 12</p>
                 <p>Games won : 8</p>
                 <p>Total game time : 4m20s</p>
+                <p>Main submission: {this.mainSubmissionName()}</p>
               </div>
             </div>
           </div>
@@ -307,7 +309,9 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
           this.setState({
             loaded: true,
             //email: JSON.parse(user).email,
-            submissions: JSON.parse(JSON.stringify(user)).submissions
+            mainSubmission: JSON.parse(JSON.stringify(user)).mainSubmission,
+            submissions: JSON.parse(JSON.stringify(user)).submissions,
+            friends: JSON.parse(JSON.stringify(user)).friends
           });
         });
         return this.authorizedLogin();
@@ -332,6 +336,54 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
     }).then((responseJson: any) => {
       callback(responseJson);
     });
+  };
+
+  getUserName = (userID: string) => {
+    var name = "";
+    fetch(HOST_URL + "/auth/get/name/" + userID, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + Auth.getToken()
+      }
+    }).then((response: any) => {
+      return response.json();
+    }).then((responseJson: any) => {
+      name = JSON.parse(JSON.stringify(responseJson)).name;
+    });
+
+    return name;
+  };
+
+  renderFriends = () => {
+    const friends = this.state.friends;
+    var friendHolders: any[];
+    friendHolders = [];
+    for (var i = 0; i < friends.length; i++) {
+      const id = friends[i].uid;
+      const name = friends[i].name;
+      console.log(name);
+      friendHolders.push(
+        <div className="row">
+          <div className="col-sm-5">
+            <p>{name}</p>
+          </div>
+          <div className="col-sm-5">
+            <a onClick={() => this.play(id)}>Challenge</a>
+          </div>
+          <div className="col-sm-2">
+            <div className="online-dot" aria-hidden="true"></div>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        {friendHolders}
+      </div>
+    );
   };
 
   renderGames = () => {

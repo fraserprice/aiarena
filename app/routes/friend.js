@@ -4,9 +4,10 @@ const mongodb = require('mongodb');
 const passport = require('passport');
 const User = require('../models/user');
 const Game = require('../models/game');
+const Friend = require('../models/friend');
 const Verification = require('../auth/verification');
 
-getUser = (username, callback)=> {
+getUser = (req, username, callback) => {
   User.findOne({'username': username}, (err, user) => {
     if(err) {
       console.log("User not found, could not add friend");
@@ -41,20 +42,39 @@ saveBothUsers = (user, currentUser, callback) => {
 
 router.get('/add/:username', (req, res) => {
   const username = req.params.username;
-  getUser(username, (user, currentUser) => {
+  getUser(req, username, (user, currentUser) => {
     if (currentUser.friends.includes(user)) {
       console.log("Users already friends");
       return res.sendStatus(200);
-    } else if (currentUser.pendingFriendRequests.includes(user.username)) {
-      user.friends.push(currentUser.username);
-      currentUser.friends.push(user.username);
-      currentUser.pendingFriendRequests.splice(currentUser.pendingFriendRequests.indexOf(user.username), 1);
-    } else {
-      user.pendingFriendRequests.push(currentUser.username);
-    }
-    saveBothUsers(user, currentUser, () => {
+    } /*else if (currentUser.pendingFriendRequests.includes(user.username)) {*/
+      //user.friends.push(currentUser.username);
+      //currentUser.friends.push(user.username);
+      //currentUser.pendingFriendRequests.splice(currentUser.pendingFriendRequests.indexOf(user.username), 1);
+    //} else {
+      //user.pendingFriendRequests.push(currentUser.username);
+    /*}*/
+    /*saveBothUsers(user, currentUser, () => {
       res.sendStatus(200);
-    });
+    });*/
+      else {
+        const friend = new Friend();
+        friend.name = username;
+        friend.uid = user._id;
+        friend.main = user.mainSubmission;
+
+        User.update(
+          { _id: currentUser._id },
+          { $push: { friends: friend }},
+          function(err, model) {
+            if (err) {
+              console.log("error adding friend");
+              return res.status(500).end();
+            }
+          }
+        );
+
+        res.status(200).json({name: username, uid: friend.uid, main: friend.main});
+      }
   });
 });
 
