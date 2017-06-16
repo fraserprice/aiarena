@@ -168,7 +168,9 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
   }
 
   setMainLocal = (dbID: string) => {
-    //TODO
+    this.setState({
+      mainSubmission: dbID
+    });
   }
 
   addGame = () => {
