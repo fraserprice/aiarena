@@ -465,7 +465,6 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
                   <Popover id={id} name={name} renameClick={this.renameGame}></Popover>
                 </div>
               </div>
-              <p>Modified 2 hours ago</p>
             </div>
           </div>
         </div>

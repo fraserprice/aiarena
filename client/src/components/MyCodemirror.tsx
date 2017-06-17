@@ -27,8 +27,6 @@ class MyCodemirror extends React.Component<MirrorProps, MirrorState> {
   };
 
   render() {
-    console.log("rendering cm..");
-    console.log(this.props.getCode());
     const options = {
       lineNumbers: true,
       mode: this.state.mode,
