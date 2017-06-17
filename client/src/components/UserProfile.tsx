@@ -1,6 +1,7 @@
 import * as React from 'react';
 import '../css/profile.scss';
 import Auth from "../modules/Auth";
+import Popover from "./Popover";
 import { Redirect, NavLink } from 'react-router-dom';
 import Config from '../config';
 
@@ -461,9 +462,7 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
                   </a>
                 </div>
                 <div className="col-sm-3 col-sm-offset-9 delete-link">
-                  <a onClick={() => this.renameGame(id, 'hhue')}>
-                    <i className="fa fa-pencil" aria-hidden="true"></i>
-                  </a>
+                  <Popover id={id} name={name} renameClick={this.renameGame}></Popover>
                 </div>
               </div>
               <p>Modified 2 hours ago</p>
