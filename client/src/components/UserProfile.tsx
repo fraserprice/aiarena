@@ -307,35 +307,6 @@ class UserProfile extends React.Component<UserProfileProps, UserProfileData> {
                   </div>
                 </div>
               </div>
-              <div className="top-game-margin">
-                <div className="row">
-                  <div className="col-sm-12">
-                    <h3>Pawn Race</h3>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-sm-3">
-                    <div className="gamecode-pane pawn-pane">
-                      <h4><div id="pawn">pawn.py</div></h4>
-                    </div>
-                  </div>
-                  <div className="col-sm-3">
-                    <div className="gamecode-pane pawn-pane">
-                      <h4><div id="pawn">pawn2.py</div></h4>
-                    </div>
-                  </div>
-                  <div className="col-sm-3">
-                    <div className="gamecode-pane pawn-pane">
-                      <h4><div id="pawn">pawn3.py</div></h4>
-                    </div>
-                  </div>
-                  <div className="col-sm-3">
-                    <div className="gamecode-pane add-code">
-                      <i className="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
