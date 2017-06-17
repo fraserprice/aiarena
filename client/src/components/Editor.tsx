@@ -110,7 +110,7 @@ class Editor extends React.Component<EditorProps, EditorState> {
 
   onMovePiece = (piece: any, fromSquare: any, toSquare: any) => {
     this.state.chess.move(fromSquare+toSquare, {sloppy: true});
-    this.setState({res: this.state.res + player + " made a move : " + toSquare + "\n"});
+    this.setState({res: this.state.res + player + " made a move : " + toSquare});
     if (player == "White") {
       player = "Black";
     } else {
